@@ -179,14 +179,16 @@
       const data = [];
       for (const s of CORPUS) { const t = ['<s>', '<s>', ...s.split(' ')]; for (let i = 2; i < t.length; i++) data.push([ix[t[i - 2]], ix[t[i - 1]], ox[t[i]]]); }
       let seed = 3; const rnd = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
-      let W1, W2, b, steps, losses;
-      const reset = () => { seed = 3; W1 = Array.from({ length: V }, () => Array.from({ length: O }, () => (rnd() - .5) * .6)); W2 = Array.from({ length: V }, () => Array.from({ length: O }, () => (rnd() - .5) * .6)); b = new Array(O).fill(0); steps = 0; losses = [avgLoss()]; };
+      let W1, W2, b, steps, losses, order = [];
+      const reset = () => { seed = 3; W1 = Array.from({ length: V }, () => Array.from({ length: O }, () => (rnd() - .5) * .6)); W2 = Array.from({ length: V }, () => Array.from({ length: O }, () => (rnd() - .5) * .6)); b = new Array(O).fill(0); steps = 0; order = []; losses = [avgLoss()]; };
       const probs = (a, c) => { const z = b.map((bb, k) => bb + W1[a][k] + W2[c][k]); const m = Math.max(...z); const e = z.map((x) => Math.exp(x - m)); const s = e.reduce((x, y) => x + y, 0); return e.map((x) => x / s); };
       function avgLoss() { let L = 0; for (const [a, c, y] of data) L -= Math.log(probs(a, c)[y] + 1e-9); return L / data.length; }
       const lr = 0.6;
       let last = null;
       const step = () => {
-        const [a, c, y] = data[Math.floor(Math.random() * data.length)];
+        // עוברים על כל המשפטים בסדר מעורבב (תמיד אותו סדר) — כך כל משפט נלמד, וההדגמה צפויה מול הכיתה
+        if (!order.length) { order = data.map((_, i) => i); for (let i = order.length - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; } }
+        const [a, c, y] = data[order.pop()];
         const p = probs(a, c);
         const guess = p.indexOf(Math.max(...p));
         for (let k = 0; k < O; k++) { const g = p[k] - (k === y ? 1 : 0); W1[a][k] -= lr * g; W2[c][k] -= lr * g * 1.4; b[k] -= lr * g * .1; }
@@ -219,9 +221,9 @@
         ctx.fillStyle = '#9aa3bd'; ctx.font = '22px Heebo'; ctx.textAlign = 'right'; ctx.fillText('כמה הוא טועה', Wd - 12, 28);
       };
       let anim = null;
-      const run = (n) => { clearInterval(anim); let k = 0; anim = setInterval(() => { step(); draw(); if (++k >= n) clearInterval(anim); }, 40); };
+      const run = (n) => { clearInterval(anim); let k = 0; anim = setInterval(() => { step(); draw(); if (++k >= n) clearInterval(anim); }, 25); };
       $('[data-act="step"]', el).addEventListener('click', () => { clearInterval(anim); step(); draw(); });
-      $('[data-act="run"]', el).addEventListener('click', () => run(60));
+      $('[data-act="run"]', el).addEventListener('click', () => run(108)); // 3 סבבים על כל המשפטים
       $('[data-act="reset"]', el).addEventListener('click', () => { clearInterval(anim); reset(); last = null; draw(); });
       q.addEventListener('change', draw); q.addEventListener('keydown', (e) => e.stopPropagation());
       el._stop = () => clearInterval(anim);

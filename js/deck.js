@@ -158,13 +158,19 @@
   }
 
   // ---------- QR ----------
+  // כתובת מפעל הפרומפטים: מה שכתוב ב-personal.js; ואם לא כתוב — כשהמצגת פתוחה מהאתר (Vercel) לוקחים את אותו אתר + /factory
+  function factoryUrl() {
+    if (P.factoryUrl) return P.factoryUrl;
+    if (/^https?:$/.test(location.protocol) && !/^(localhost|127\.|0\.0\.0\.0)/.test(location.hostname)) return location.origin + '/factory';
+    return '';
+  }
   function initQR() {
+    const url = factoryUrl();
     $$('[data-qr]').forEach((el) => {
-      const url = P.factoryUrl || '';
+      if (!url) { el.innerHTML = '<div style="width:300px;height:300px;display:flex;align-items:center;justify-content:center;text-align:center;color:#b00;font:700 20px Heebo">חסרה כתובת: factoryUrl ב-js/personal.js</div>'; return; }
       try { const qr = qrcode(0, 'M'); qr.addData(url); qr.make(); el.innerHTML = qr.createSvgTag({ cellSize: 6, margin: 0, scalable: true }); } catch (e) { el.textContent = 'QR'; }
     });
-    $$('[data-url]').forEach((el) => (el.textContent = (P.factoryUrl || '').replace(/^https?:\/\//, '')));
-    if (/example\.com/.test(P.factoryUrl || '')) $$('[data-url]').forEach((el) => (el.innerHTML += '<div class="hint" style="color:var(--pink)">לעדכן את factoryUrl ב-js/personal.js</div>'));
+    $$('[data-url]').forEach((el) => (el.textContent = url.replace(/^https?:\/\//, '')));
   }
 
   // ---------- HUD: שעון + זמן שעבר (T) ----------
