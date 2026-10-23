@@ -3,8 +3,3 @@ test-shots/
 ai-lecture.pdf
 .DS_Store
 # קליפים מוגנים — נשארים רק במחשב (ה-repo וה-Vercel ציבוריים). מורידים עם tools/get-clips.sh
-media/video/jarvis-ironman-2008.mp4
-media/video/zuckerberg-jarvis-2016.mp4
-media/video/will-smith-spaghetti-2023.mp4
-media/video/will-smith-spaghetti-now.mp4
-media/video/deeptomcruise-2021.mp4
