@@ -1,0 +1,12 @@
+# רשימת הקליפים להורדה — tools/get-clips.sh קורא את הקובץ הזה.
+# פורמט: שם-קובץ | קישור או חיפוש | שנייה-התחלה | אורך-בשניות
+#  - אם בעמודה השנייה יש קישור (https://...) — מוריד בדיוק אותו.
+#  - אם יש טקסט — מחפש ביוטיוב ולוקח את התוצאה הראשונה. תצפה בתוצאה! אם היא לא נכונה,
+#    הדבק במקומה קישור מדויק והרץ שוב.
+#  - שנייה-התחלה ואורך: כדי לחתוך רק את הקטע הרלוונטי. אחרי צפייה ראשונה אפשר לכוונן.
+
+jarvis-ironman-2008.mp4        | Iron Man 2008 Tony Stark JARVIS workshop scene clip | 0 | 60
+zuckerberg-jarvis-2016.mp4     | Mark Zuckerberg Jarvis Morgan Freeman 2016 video     | 0 | 45
+will-smith-spaghetti-2023.mp4  | Will Smith eating spaghetti AI ModelScope 2023 original | 0 | 20
+will-smith-spaghetti-now.mp4   | Will Smith eating spaghetti Veo 3 AI video 2025     | 0 | 20
+deeptomcruise-2021.mp4         | deeptomcruise tiktok deepfake Tom Cruise coin trick 2021 | 0 | 20
