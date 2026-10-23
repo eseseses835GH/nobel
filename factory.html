@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>מפעל הפרומפטים</title>
+<meta name="description" content="עונים על כמה שאלות ומקבלים פרומפט מפורט לבניית אתר עם AI. שום מידע לא נשלח לשום מקום.">
+<style>
+  :root {
+    --bg: #0a0c14; --card: #151a30; --line: #2a3156; --ink: #f5f2ea; --muted: #9aa3bd;
+    --amber: #ffc933; --cyan: #4de1ff; --pink: #ff5c8a; --green: #4ade80; --red: #ff6b6b; --violet: #a78bfa;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: var(--bg); color: var(--ink); font-family: 'Heebo', 'Rubik', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif; font-size: 17px; line-height: 1.5; }
+  body { background: radial-gradient(900px 500px at 90% -10%, #1a2150, transparent 60%), var(--bg); min-height: 100vh; }
+  header { padding: 22px 16px 6px; max-width: 1200px; margin: 0 auto; }
+  h1 { margin: 0; font-size: clamp(28px, 6vw, 44px); line-height: 1.1; }
+  h1 .g { background: linear-gradient(90deg, var(--cyan), var(--violet), var(--pink)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .lead { color: var(--muted); margin: 6px 0 0; }
+  .privacy { display: inline-block; margin-top: 10px; font-size: 14px; color: #c9f7d8; background: rgba(74,222,128,.1); border: 1px solid rgba(74,222,128,.35); padding: 4px 12px; border-radius: 999px; }
+  main { max-width: 1200px; margin: 0 auto; padding: 12px 16px 140px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 440px); gap: 20px; align-items: start; }
+  @media (max-width: 900px) { main { grid-template-columns: minmax(0, 1fr); padding-bottom: 40px; } }
+  .q { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px 18px; margin-bottom: 14px; }
+  .q h2 { margin: 0 0 4px; font-size: 21px; display: flex; gap: 10px; align-items: center; }
+  .q h2 .n { flex: none; width: 30px; height: 30px; border-radius: 50%; background: var(--cyan); color: #00151b; font-size: 16px; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; }
+  .q .why { color: var(--muted); font-size: 14px; margin: 0 0 10px; }
+  label.f { display: block; font-size: 15px; color: #d5dbeb; margin: 10px 0 4px; }
+  input[type=text], textarea, select { width: 100%; font: inherit; color: var(--ink); background: #0c1022; border: 1.5px solid var(--line); border-radius: 12px; padding: 9px 12px; }
+  textarea { min-height: 76px; resize: vertical; }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: var(--cyan); }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { font: inherit; font-size: 15px; color: var(--ink); background: #0c1022; border: 1.5px solid var(--line); border-radius: 999px; padding: 6px 13px; cursor: pointer; user-select: none; }
+  .chip[aria-pressed="true"] { background: rgba(77,225,255,.15); border-color: var(--cyan); color: #fff; }
+  .swatches { display: flex; flex-wrap: wrap; gap: 10px; }
+  .sw { cursor: pointer; border: 2px solid var(--line); border-radius: 14px; padding: 6px; background: #0c1022; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: 13px; color: var(--muted); }
+  .sw .c { display: flex; } .sw .c i { width: 22px; height: 22px; display: block; } .sw .c i:first-child { border-radius: 6px 0 0 6px; } .sw .c i:last-child { border-radius: 0 6px 6px 0; }
+  .sw[aria-pressed="true"] { border-color: var(--amber); color: #fff; }
+  .warn { display: none; margin-top: 8px; font-size: 14px; color: #ffd0da; background: rgba(255,92,138,.12); border: 1px solid rgba(255,92,138,.5); padding: 6px 10px; border-radius: 10px; }
+  .warn.on { display: block; }
+  .out { position: sticky; top: 12px; }
+  @media (max-width: 900px) { .out { position: static; } }
+  .panel { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 16px; }
+  .meter { height: 18px; border-radius: 999px; background: #0c1022; border: 1px solid var(--line); overflow: hidden; }
+  .meter > div { height: 100%; width: 0; border-radius: 999px; transition: width .4s, background .4s; }
+  .score { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+  .score b { font-size: 30px; }
+  .tips { margin: 10px 0 0; padding: 0 18px 0 0; font-size: 14px; color: var(--muted); }
+  .tips li { margin: 3px 0; }
+  pre { white-space: pre-wrap; word-wrap: break-word; background: #0c1022; border: 1px solid var(--line); border-radius: 12px; padding: 12px; font: 14px/1.55 inherit; font-family: inherit; max-height: 46vh; overflow: auto; margin: 12px 0; direction: rtl; text-align: right; }
+  .btn { font: inherit; font-weight: 700; border-radius: 12px; padding: 10px 16px; border: 1.5px solid var(--line); background: #1a2040; color: var(--ink); cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+  .btn.primary { background: var(--cyan); border-color: var(--cyan); color: #00151b; width: 100%; justify-content: center; font-size: 19px; }
+  .btn.small { font-size: 14px; padding: 6px 10px; }
+  .row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .tools { margin-top: 12px; font-size: 14px; color: var(--muted); }
+  .tools .row { margin-top: 6px; }
+  .ok { color: var(--green); }
+  footer { max-width: 1200px; margin: 0 auto; padding: 0 16px 30px; color: var(--muted); font-size: 13px; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  @media (max-width: 520px) { .grid2 { grid-template-columns: 1fr; } }
+  .copied { color: var(--green); font-weight: 700; text-align: center; min-height: 22px; margin-top: 6px; }
+  .mini { display: none; }
+  @media (max-width: 900px) {
+    .mini { display: flex; position: fixed; z-index: 10; left: 0; right: 0; bottom: 0; gap: 10px; align-items: center; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); background: rgba(10,12,20,.96); border-top: 1px solid var(--line); }
+    .mini .meter { flex: 1; }
+    .mini b { min-width: 34px; font-size: 20px; }
+    main { padding-bottom: 90px; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>🏭 <span class="g">מפעל הפרומפטים</span></h1>
+  <p class="lead">עונים על השאלות → מקבלים בקשה מפורטת → מדביקים בכלי AI שבונה אתרים.</p>
+  <span class="privacy">🔒 שום דבר לא נשלח לשום מקום. הכל נשאר בטלפון/מחשב שלך.</span>
+</header>
+
+<main>
+  <form id="form" autocomplete="off" onsubmit="return false">
+
+    <section class="q">
+      <h2><span class="n">1</span>מי אני?</h2>
+      <p class="why">רק כינוי או שם פרטי. <b>בלי שם מלא, כתובת, טלפון, בית ספר.</b></p>
+      <div class="grid2">
+        <div><label class="f" for="nick">כינוי (לא חובה)</label><input type="text" id="nick" maxlength="20" placeholder="למשל: נוני, Captain T"></div>
+        <div><label class="f" for="grade">כיתה</label><select id="grade"><option value="">—</option><option>ז׳</option><option>ח׳</option><option>ט׳</option></select></div>
+      </div>
+      <label class="f">מה אני אוהב/ת? (אפשר כמה)</label>
+      <div class="chips" data-group="likes">
+        <button type="button" class="chip">כדורגל</button><button type="button" class="chip">כדורסל</button><button type="button" class="chip">גיימינג</button><button type="button" class="chip">מוזיקה</button><button type="button" class="chip">ציור</button><button type="button" class="chip">חיות</button><button type="button" class="chip">חלל</button><button type="button" class="chip">מדע</button><button type="button" class="chip">בישול</button><button type="button" class="chip">ספרים</button><button type="button" class="chip">אנימה</button><button type="button" class="chip">ריקוד</button><button type="button" class="chip">טבע</button><button type="button" class="chip">תכנות</button>
+      </div>
+      <label class="f" for="likesFree">ועוד משהו שאני אוהב/ת</label>
+      <input type="text" id="likesFree" placeholder="למשל: דינוזאורים, קוביות הונגריות">
+      <div class="warn" data-warn></div>
+    </section>
+
+    <section class="q">
+      <h2><span class="n">2</span>מה המטרה?</h2>
+      <p class="why">איזה אתר? ובשביל מה?</p>
+      <div class="chips" data-group="type" data-single>
+        <button type="button" class="chip">אתר על התחביב שלי</button><button type="button" class="chip">אתר מעריצים</button><button type="button" class="chip">משחק</button><button type="button" class="chip">חידון</button><button type="button" class="chip">כלי שימושי</button><button type="button" class="chip">גלריה של היצירות שלי</button><button type="button" class="chip">אתר לימודי</button><button type="button" class="chip">אתר לקבוצה/מועדון</button>
+      </div>
+      <label class="f" for="goal">במשפט אחד: מה האתר עושה?</label>
+      <input type="text" id="goal" placeholder="למשל: מלמד ילדים להכיר את כוכבי הלכת בעזרת חידון מצחיק">
+      <label class="f">למי האתר?</label>
+      <div class="chips" data-group="audience" data-single>
+        <button type="button" class="chip">לי</button><button type="button" class="chip">לחברים</button><button type="button" class="chip">לכיתה</button><button type="button" class="chip">למשפחה</button><button type="button" class="chip">לילדים קטנים</button><button type="button" class="chip">לכולם</button>
+      </div>
+      <div class="warn" data-warn></div>
+    </section>
+
+    <section class="q">
+      <h2><span class="n">3</span>תוכן</h2>
+      <p class="why">מה יהיה באתר? כמה שיותר פרטים = אתר יותר טוב.</p>
+      <label class="f" for="title">שם לאתר</label>
+      <input type="text" id="title" placeholder="למשל: מסע בין הכוכבים">
+      <label class="f" for="sections">חלקים/עמודים (שורה לכל אחד)</label>
+      <textarea id="sections" placeholder="עמוד בית עם כותרת גדולה&#10;8 כוכבי הלכת — כרטיס לכל אחד&#10;חידון של 5 שאלות&#10;עובדות מטורפות"></textarea>
+      <label class="f" for="facts">משהו שחייב להופיע (עובדות, טקסט, רעיון)</label>
+      <textarea id="facts" placeholder="למשל: צדק הוא כוכב הלכת הכי גדול. על נוגה יום ארוך משנה."></textarea>
+      <div class="warn" data-warn></div>
+    </section>
+
+    <section class="q">
+      <h2><span class="n">4</span>סגנון</h2>
+      <p class="why">איך האתר נראה ומרגיש?</p>
+      <label class="f">צבעים</label>
+      <div class="swatches" data-group="palette" data-single>
+        <button type="button" class="sw" data-v="כחול לילה עם צהוב זוהר"><span class="c"><i style="background:#0b1a3a"></i><i style="background:#ffd23f"></i></span>לילה</button>
+        <button type="button" class="sw" data-v="ירוק טבעי ובז׳"><span class="c"><i style="background:#2f6f3e"></i><i style="background:#efe6cf"></i></span>טבע</button>
+        <button type="button" class="sw" data-v="ורוד וסגול ניאון על רקע שחור"><span class="c"><i style="background:#111"></i><i style="background:#ff3ea5"></i></span>ניאון</button>
+        <button type="button" class="sw" data-v="לבן נקי עם כחול"><span class="c"><i style="background:#fff"></i><i style="background:#2563eb"></i></span>נקי</button>
+        <button type="button" class="sw" data-v="כתום ואדום חמים"><span class="c"><i style="background:#ff7a1a"></i><i style="background:#d7263d"></i></span>אש</button>
+        <button type="button" class="sw" data-v="צבעי פסטל רכים"><span class="c"><i style="background:#ffd6e7"></i><i style="background:#c8f0ff"></i></span>פסטל</button>
+        <button type="button" class="sw" data-v="צבעי הקבוצה שלי (כתבתי למטה)"><span class="c"><i style="background:linear-gradient(90deg,#f00,#ff0,#0f0,#0ff,#00f)"></i><i style="background:#888"></i></span>אחר</button>
+      </div>
+      <label class="f">אווירה (אפשר כמה)</label>
+      <div class="chips" data-group="mood">
+        <button type="button" class="chip">מצחיק</button><button type="button" class="chip">מגניב</button><button type="button" class="chip">רגוע</button><button type="button" class="chip">מסתורי</button><button type="button" class="chip">חללי</button><button type="button" class="chip">משחקי/רטרו</button><button type="button" class="chip">אלגנטי</button><button type="button" class="chip">צבעוני ושמח</button>
+      </div>
+      <label class="f" for="styleFree">עוד על העיצוב</label>
+      <input type="text" id="styleFree" placeholder="למשל: כפתורים עגולים גדולים, הרבה אימוג׳ים, כוכבים זזים ברקע">
+      <div class="warn" data-warn></div>
+    </section>
+
+    <section class="q">
+      <h2><span class="n">5</span>יכולות</h2>
+      <p class="why">מה אפשר לעשות באתר?</p>
+      <div class="chips" data-group="features">
+        <button type="button" class="chip">חידון עם ניקוד</button><button type="button" class="chip">משחק קטן</button><button type="button" class="chip">גלריה של תמונות/ציורים</button><button type="button" class="chip">כפתור "הפתע אותי"</button><button type="button" class="chip">טיימר / ספירה לאחור</button><button type="button" class="chip">מצב לילה</button><button type="button" class="chip">אנימציות</button><button type="button" class="chip">טבלת שיאים (רק במכשיר)</button><button type="button" class="chip">צלילים</button><button type="button" class="chip">רשימת משימות</button><button type="button" class="chip">מחשבון / כלי</button><button type="button" class="chip">כרטיסיות שמתהפכות</button>
+      </div>
+      <label class="f" for="featFree">יכולת שאני ממציא/ה</label>
+      <input type="text" id="featFree" placeholder="למשל: כשלוחצים על כוכב לכת הוא מסתובב ומראה עובדה">
+      <div class="warn" data-warn></div>
+    </section>
+
+    <section class="q">
+      <h2><span class="n">6</span>אילוצים</h2>
+      <p class="why">גבולות שהאתר חייב לשמור. (הכי חשובים כבר מסומנים.)</p>
+      <div class="chips" data-group="limits">
+        <button type="button" class="chip" aria-pressed="true">עברית, מימין לשמאל</button><button type="button" class="chip" aria-pressed="true">עובד טוב בטלפון</button><button type="button" class="chip" aria-pressed="true">בלי הרשמה וסיסמאות</button><button type="button" class="chip" aria-pressed="true">בלי לאסוף מידע אישי</button><button type="button" class="chip" aria-pressed="true">מתאים לגיל 12–14</button><button type="button" class="chip">טקסט גדול וקריא</button><button type="button" class="chip">בלי תמונות של אנשים אמיתיים</button><button type="button" class="chip">עמוד אחד בלבד</button>
+      </div>
+      <label class="f" for="limitsFree">עוד גבול</label>
+      <input type="text" id="limitsFree" placeholder="למשל: בלי צלילים בלי שלוחצים, בלי פרסומות">
+      <div class="warn" data-warn></div>
+    </section>
+
+    <section class="q">
+      <h2><span class="n">7</span>דוגמה <span style="font-weight:400;color:var(--muted);font-size:15px">(הרכיב הכי חזק!)</span></h2>
+      <p class="why">תן/י דוגמה למה שאת/ה רוצה: שאלה לחידון, משפט בסגנון שאת/ה אוהב/ת, או אתר/משחק שאת/ה אוהב/ת את העיצוב שלו.</p>
+      <textarea id="example" placeholder="למשל: שאלה לחידון — 'איזה כוכב לכת הכי חם? א. מאדים ב. נוגה ג. כוכב חמה' (תשובה: נוגה!)"></textarea>
+      <div class="warn" data-warn></div>
+    </section>
+
+    <button type="button" class="btn small" id="reset" style="margin-top:4px">↺ להתחיל מחדש</button>
+  </form>
+
+  <aside class="out">
+    <div class="panel">
+      <div class="score"><span>מד איכות</span><b id="scoreN">0</b></div>
+      <div class="meter"><div id="meter"></div></div>
+      <div id="scoreLabel" style="margin-top:6px;font-weight:700"></div>
+      <ul class="tips" id="tips"></ul>
+      <pre id="prompt" aria-label="הפרומפט"></pre>
+      <button class="btn primary" id="copy" type="button">📋 העתק את הפרומפט</button>
+      <div class="copied" id="copied"></div>
+      <div class="tools">
+        עכשיו מדביקים באחד הכלים (בדקו את הגיל המינימלי!):
+        <div class="row">
+          <a class="btn small" href="https://base44.com" target="_blank" rel="noopener">Base44</a>
+          <a class="btn small" href="https://gemini.google.com" target="_blank" rel="noopener">Gemini (Canvas)</a>
+          <a class="btn small" href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT (Canvas)</a>
+        </div>
+        <p style="margin:8px 0 0">אחרי שהאתר נבנה — ממשיכים לשפר בשיחה: "תוסיף…", "תשנה את…", "זה לא עובד כש…".</p>
+      </div>
+    </div>
+  </aside>
+</main>
+<div class="mini"><span>איכות</span><b id="miniN">0</b><div class="meter"><div id="miniMeter"></div></div><a class="btn small" href="#prompt">לפרומפט ↓</a></div>
+<footer>מפעל הפרומפטים · נבנה עבור ההרצאה "בינה מלאכותית" · לומדים עם מדענים. העמוד לא שומר ולא שולח מידע; התשובות נשמרות רק בדפדפן שלך כדי שלא יימחקו ברענון.</footer>
+
+<script>
+(function () {
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+  const KEY = 'prompt-factory-v1';
+
+  // ---------- מסנן מידע אישי ----------
+  const PII = [
+    { re: /(?:\+?972[-\s]?|0)(?:5\d|[2-489]|7\d)[-\s]?\d{3}[-\s]?\d{4}/g, msg: 'מספר טלפון' },
+    { re: /[\w.+-]+@[\w-]+\.[\w.-]+/g, msg: 'כתובת מייל' },
+    { re: /\b\d{9}\b/g, msg: 'מספר שנראה כמו תעודת זהות' },
+    { re: /(?:רחוב|רח['׳]|שדרות|שד['׳]|סמטת)\s*[֐-׿"'׳״ ]{2,20}\s*\d+/g, msg: 'כתובת מגורים' },
+    { re: /(?:סיסמה|סיסמא|password)\s*[:=]?\s*\S+/gi, msg: 'סיסמה' },
+  ];
+  function scrub(el) {
+    let v = el.value, found = [];
+    for (const p of PII) { if (p.re.test(v)) { found.push(p.msg); v = v.replace(p.re, '[הוסר]'); } p.re.lastIndex = 0; }
+    if (el.id === 'nick' && /\S+\s+\S+/.test(v)) found.push('שם מלא (רק כינוי או שם פרטי)');
+    const w = el.closest('.q').querySelector('[data-warn]');
+    if (found.length) {
+      if (v !== el.value) el.value = v;
+      w.innerHTML = '🛑 זיהינו ' + found.join(', ') + '. אסור לשתף מידע אישי עם כלי AI — ' + (v.includes('[הוסר]') ? 'מחקנו אותו.' : 'כדאי להוריד.');
+      w.classList.add('on');
+    } else w.classList.remove('on');
+  }
+
+  // ---------- כפתורי בחירה ----------
+  $$('[data-group]').forEach((g) => {
+    g.addEventListener('click', (e) => {
+      const b = e.target.closest('button'); if (!b) return;
+      const on = b.getAttribute('aria-pressed') === 'true';
+      if (g.hasAttribute('data-single')) $$('button', g).forEach((x) => x.setAttribute('aria-pressed', 'false'));
+      b.setAttribute('aria-pressed', on ? 'false' : 'true');
+      update();
+    });
+    $$('button', g).forEach((b) => { if (!b.hasAttribute('aria-pressed')) b.setAttribute('aria-pressed', 'false'); });
+  });
+  const picked = (name) => $$(`[data-group="${name}"] button[aria-pressed="true"]`).map((b) => b.dataset.v || b.textContent.trim());
+  const val = (id) => $('#' + id).value.trim();
+  const lines = (id) => val(id).split('\n').map((s) => s.trim()).filter(Boolean);
+
+  // ---------- בניית הפרומפט ----------
+  function build() {
+    const likes = picked('likes').concat(val('likesFree') ? [val('likesFree')] : []);
+    const type = picked('type')[0], audience = picked('audience')[0];
+    const palette = picked('palette')[0], mood = picked('mood');
+    const feats = picked('features').concat(val('featFree') ? [val('featFree')] : []);
+    const limits = picked('limits').concat(val('limitsFree') ? [val('limitsFree')] : []);
+    const secs = lines('sections');
+    const P = [];
+    P.push('🎭 תפקיד:\nאתה מפתח אתרים ומעצב מומחה, שבונה אתרים מרהיבים, פשוטים ועובדים לבני נוער.');
+    let goal = '🎯 מטרה:\nבנה לי אתר' + (type ? ` מסוג "${type}"` : '') + (val('title') ? ` בשם "${val('title')}"` : '') + '.';
+    if (val('goal')) goal += `\nהאתר: ${val('goal')}.`;
+    if (audience) goal += `\nהאתר מיועד ${audience === 'לי' ? 'לי' : audience}.`;
+    P.push(goal);
+    const ctx = [];
+    if (val('grade')) ctx.push(`אני תלמיד/ה בכיתה ${val('grade')}.`);
+    if (val('nick')) ctx.push(`הכינוי שלי: ${val('nick')}.`);
+    if (likes.length) ctx.push(`אני אוהב/ת: ${likes.join(', ')}.`);
+    if (val('facts')) ctx.push(`תוכן שחייב להופיע: ${val('facts')}`);
+    if (ctx.length) P.push('📚 הקשר:\n' + ctx.join('\n'));
+    if (secs.length) P.push('🧱 חלקים באתר:\n' + secs.map((s, i) => `${i + 1}. ${s}`).join('\n'));
+    const style = [];
+    if (palette) style.push(`צבעים: ${palette}.`);
+    if (mood.length) style.push(`אווירה: ${mood.join(', ')}.`);
+    if (val('styleFree')) style.push(val('styleFree'));
+    if (style.length) P.push('🎨 סגנון:\n' + style.join('\n'));
+    if (feats.length) P.push('⚙️ יכולות:\n' + feats.map((f) => `- ${f}`).join('\n'));
+    P.push('🚧 אילוצים:\n' + limits.map((l) => `- ${l}`).join('\n') + '\n- אל תשתמש בשמות או בתמונות של אנשים אמיתיים, ואל תבקש ממני פרטים אישיים.');
+    if (val('example')) P.push('💡 דוגמה למה שאני רוצה:\n' + val('example'));
+    P.push('📐 פורמט:\nבנה אתר עובד ומלא — לא רק הסבר. כל הטקסט באתר בעברית. אם משהו לא ברור לך, תבחר בעצמך את האפשרות הכי מגניבה ותגיד לי מה בחרת. בסוף, תציע לי 3 רעיונות לשיפור.');
+    return P.join('\n\n');
+  }
+
+  // ---------- מד איכות ----------
+  function score() {
+    const tips = []; let s = 10; // תפקיד — תמיד קיים
+    const add = (ok, pts, tip) => { if (ok) s += pts; else if (tip) tips.push(tip); };
+    add(picked('type').length, 8, 'בחר/י סוג אתר (שאלה 2)');
+    add(val('goal').length >= 15, 12, 'כתוב/כתבי במשפט מה האתר עושה (שאלה 2)');
+    add(picked('audience').length, 5, 'למי האתר? (שאלה 2)');
+    add(picked('likes').length || val('likesFree'), 5, 'ספר/י מה את/ה אוהב/ת (שאלה 1)');
+    const secs = lines('sections').length;
+    s += Math.min(secs, 4) * 4; if (secs < 3) tips.push('כתוב/כתבי לפחות 3 חלקים לאתר (שאלה 3)');
+    add(val('title'), 4, 'תן/י שם לאתר (שאלה 3)');
+    add(val('facts').length >= 15, 6, 'הוסף/י תוכן שחייב להופיע (שאלה 3)');
+    add(picked('palette').length, 5, 'בחר/י צבעים (שאלה 4)');
+    add(picked('mood').length || val('styleFree'), 5, 'בחר/י אווירה (שאלה 4)');
+    const f = picked('features').length + (val('featFree') ? 1 : 0);
+    s += Math.min(f, 3) * 3; if (f < 2) tips.push('בחר/י לפחות 2 יכולות (שאלה 5)');
+    add(picked('limits').length >= 3, 6, 'השאר/י את האילוצים החשובים מסומנים (שאלה 6)');
+    add(val('example').length >= 15, 12, 'תן/י דוגמה — זה הרכיב הכי חזק! (שאלה 7)');
+    return { s: Math.max(0, Math.min(100, s)), tips };
+  }
+
+  function update() {
+    $('#prompt').textContent = build();
+    const { s, tips } = score();
+    $('#scoreN').textContent = s;
+    const color = s < 45 ? 'var(--red)' : s < 75 ? 'var(--amber)' : 'var(--green)';
+    for (const m of [$('#meter'), $('#miniMeter')]) { m.style.width = s + '%'; m.style.background = color; }
+    $('#miniN').textContent = s;
+    $('#scoreLabel').textContent = s < 45 ? '🔴 מעורפל — ה-AI ינחש הרבה' : s < 75 ? '🟡 לא רע! עוד קצת פרטים' : s < 95 ? '🟢 מדויק! מוכן להעתקה' : '🏆 פרומפט של מקצוענים';
+    $('#tips').innerHTML = tips.slice(0, 3).map((t) => `<li>${t}</li>`).join('');
+    save();
+  }
+
+  // ---------- שמירה מקומית ----------
+  function save() {
+    try {
+      const st = { f: {}, g: {} };
+      $$('input[type=text], textarea, select').forEach((el) => (st.f[el.id] = el.value));
+      $$('[data-group]').forEach((g) => (st.g[g.dataset.group] = $$('button', g).map((b) => b.getAttribute('aria-pressed') === 'true')));
+      localStorage.setItem(KEY, JSON.stringify(st));
+    } catch {}
+  }
+  function load() {
+    try {
+      const st = JSON.parse(localStorage.getItem(KEY) || 'null'); if (!st) return;
+      for (const [id, v] of Object.entries(st.f || {})) { const el = document.getElementById(id); if (el) el.value = v; }
+      for (const [g, arr] of Object.entries(st.g || {})) $$(`[data-group="${g}"] button`).forEach((b, i) => b.setAttribute('aria-pressed', arr[i] ? 'true' : 'false'));
+    } catch {}
+  }
+
+  $$('input[type=text], textarea').forEach((el) => el.addEventListener('input', () => { scrub(el); update(); }));
+  $('#grade').addEventListener('change', update);
+  $('#reset').addEventListener('click', () => { if (!confirm('למחוק את כל התשובות?')) return; try { localStorage.removeItem(KEY); } catch {} location.reload(); });
+  $('#copy').addEventListener('click', async () => {
+    const text = $('#prompt').textContent;
+    let ok = false;
+    try { await Promise.race([navigator.clipboard.writeText(text), new Promise((_, rej) => setTimeout(rej, 800))]); ok = true; } catch {}
+    if (!ok) { const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); try { ok = document.execCommand('copy'); } catch {} ta.remove(); }
+    $('#copied').textContent = ok ? '✔ הועתק! עכשיו הדביקו בכלי.' : 'סמנו את הטקסט והעתיקו ידנית';
+    setTimeout(() => ($('#copied').textContent = ''), 3000);
+  });
+  load(); update();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,1003 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>בינה מלאכותית — לומדים עם מדענים</title>
+<link rel="stylesheet" href="vendor/reveal/reset.css">
+<link rel="stylesheet" href="vendor/reveal/reveal.css">
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/deck.css">
+</head>
+<body>
+<div class="reveal"><div class="slides">
+
+<!-- =========================================================
+     חלק א׳ — פתיחה
+     ========================================================= -->
+
+<section id="title" data-id="title">
+  <div data-demo="ambient" style="position:absolute;inset:0"></div>
+  <div class="above">
+    <div class="kicker">לומדים עם מדענים · חתני פרס נובל</div>
+    <h1 class="huge"><span class="grad">בינה מלאכותית</span></h1>
+    <p class="big muted" style="margin-top:.4em">איך היא עובדת · מה היא יודעת · ואיפה היא עובדת עלינו</p>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:00</span> · בזמן שהם נכנסים — השקף הזה על המסך. לא מתחילים לדבר עד שיש שקט.</p>
+    <p><b>מקשים:</b> → / רווח / לחיצה = הבא · ← / לחיצה ימנית = הקודם · S = חלון הערות · F = מסך מלא · B = מסך שחור · O = כל השקפים · D = קלף אישי · T = שעון · M = מצב המדיה · H = הסתר כרטיסי "חסר".</p>
+  </div></aside>
+</section>
+
+<section id="your-problems" data-id="your-problems">
+  <h2 class="huge" style="font-size:4.4em">מה הבעיות שלכם<span class="amber">???</span></h2>
+  <div class="wall"></div>
+  <div class="wall-input interactive">
+    <input type="text" placeholder="הקלד בעיה ולחץ Enter…" aria-label="בעיה">
+    <button class="btn primary" data-act="add">הוסף</button>
+    <button class="btn ghost small" data-act="clear">ניקוי</button>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:00–0:04</span> · <b>פתיחה שמעירה.</b> אל תציג את עצמך עדיין.</p>
+    <ul>
+      <li>"לפני שאני אומר מי אני — אני צריך מכם משהו. כל אחד כותב על פתק בעיה אחת אמיתית שיש לו. קטנה או גדולה. בלי שמות."</li>
+      <li>אוספים 5–8 פתקים, מקריאים, ו<b>מקלידים בקיר</b> (שדה למטה, Enter). זה נשמר במחשב — נחזור לקיר הזה בסוף השיעור.</li>
+      <li>אם אין פתקים: שואלים בקול ומקלידים 4–5 תשובות.</li>
+      <li>"שמרו את הבעיות האלה בראש. בסוף נבדוק: אילו מהן בינה מלאכותית יכולה לפתור — ואילו לא."</li>
+    </ul>
+    <p>טיפ: כשהסמן בתוך השדה, החצים לא מעבירים שקף. לחץ Esc כדי לצאת מהשדה.</p>
+  </div></aside>
+</section>
+
+<section id="my-problems" data-id="my-problems">
+  <h2>והבעיות <span class="amber">שלי</span></h2>
+  <div class="cards-row" id="my-problems-cards"></div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:04–0:06</span> · כל לחיצה הופכת קלף. התוכן נמצא ב-<code>js/personal.js</code>.</p>
+    <p><b>הקלף האישי (געגוע לאבא) מוסתר.</b> לחיצה על <b>D</b> מציגה/מסתירה אותו — בכל רגע, גם מחלון ההערות. ההחלטה שלך, בזמן אמת, לפי האווירה בכיתה.</p>
+    <p>אם מציגים — משפט אחד, בלי להאריך. אפשר: "ויש בעיות שאין להן פתרון. נחזור לזה בסוף."</p>
+  </div></aside>
+</section>
+
+<section id="about-me" data-id="about-me">
+  <div class="row" style="width:1120px;align-items:center;gap:50px">
+    <div class="m" data-m="me_photo" style="width:400px;height:500px;flex:none"></div>
+    <div class="col stack" style="align-items:stretch;text-align:right">
+      <div class="kicker" style="text-align:right">כמה מילים עליי</div>
+      <h2 style="text-align:right;margin:0" data-personal="name">אלי</h2>
+      <div id="about-list" class="stack" style="align-items:stretch;gap:14px"></div>
+    </div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:06–0:07</span> · קצר. השורות עצמן נמצאות ב-<code>js/personal.js</code> (כל TODO צריך להחליף).</p>
+    <p>חיבור לפעם הקודמת: "בפעם הקודמת דיברנו על סייבר. היום — על הדבר שהכי משנה את העולם עכשיו."</p>
+  </div></aside>
+</section>
+
+<section id="journey" data-id="journey">
+  <div class="kicker">המסע של היום</div>
+  <div class="grid-3" style="width:1120px">
+    <div class="card fragment rise"><span class="emoji">🦾</span><h3>החלום</h3><p>מאיירון מן ועד היום</p></div>
+    <div class="card fragment rise"><span class="emoji">⚙️</span><h3>מאחורי הקלעים</h3><p>איך זה באמת עובד</p></div>
+    <div class="card fragment rise"><span class="emoji">🤥</span><h3>כשהוא טועה</h3><p>ומשחק: אמת או AI?</p></div>
+    <div class="card fragment rise"><span class="emoji">💬</span><h3>איך מדברים איתו</h3><p>6 רכיבים של בקשה טובה</p></div>
+    <div class="card fragment rise"><span class="emoji">🛡️</span><h3>הצד המסוכן</h3><p>וכללי זהב</p></div>
+    <div class="card fragment rise"><span class="emoji">🚀</span><h3>אתם בונים</h3><p>כל אחד יוצא עם אתר</p></div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:07–0:08</span> · מפת הדרך. "בסוף השיעור כל אחד מכם יוצא עם אתר אמיתי שהוא בנה." (זה מה שמחזיק אותם קשובים).</p>
+  </div></aside>
+</section>
+
+<!-- =========================================================
+     חלק ב׳ — ג׳ארוויס
+     ========================================================= -->
+
+<section id="ironman-q" data-id="ironman-q">
+  <p class="huge" style="font-size:3.6em">מי ראה <span class="grad-warm">איירון מן</span>?</p>
+  <p class="fragment pop" style="font-size:4em;margin-top:.2em">🙋‍♀️🙋🙋‍♂️</p>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:08</span> · ידיים למעלה. "מי זוכר מי זה ג׳ארוויס?" — תנו לאחד להסביר.</p>
+  </div></aside>
+</section>
+
+<section id="jarvis-clip" data-id="jarvis-clip">
+  <div class="m full contain" data-m="jarvis_clip" data-fallback="jarvis_still"></div>
+  <span class="fragment video-trigger" data-play="jarvis_clip"></span>
+  <div class="tag">Iron Man · 2008 · מדע בדיוני</div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:08–0:10</span> · <b>לחיצה אחת מנגנת</b> את הקטע (או לחיצה על הווידאו עצמו). לחיצה נוספת — לשקף הבא.</p>
+    <p>"בשנת 2008 זה היה מדע בדיוני מוחלט: מחשב שמדבר איתך, מבין אותך, עוזר לך לבנות. תחזיקו את התמונה הזאת."</p>
+    <p>אם אין קובץ: מספרים את הסצנה בעל-פה (טוני מדבר עם ג׳ארוויס במעבדה).</p>
+  </div></aside>
+</section>
+
+<section id="zuck" data-id="zuck">
+  <div class="m full" data-m="zuck_jarvis"></div>
+  <div class="yearmark">2016</div>
+  <div class="caption">
+    <div class="t">צוקרברג בונה ג׳ארוויס אמיתי — לבית שלו</div>
+    <div class="s fragment">„a simple AI to run my home” · אורות, מוזיקה, דלת, וקול של מורגן פרימן</div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:10–0:11</span> · האתגר האישי של מארק צוקרברג לשנת 2016: לבנות "AI פשוט שינהל לי את הבית ויעזור לי בעבודה — כמו ג׳ארוויס מאיירון מן".</p>
+    <ul>
+      <li>הוא כתב את זה בעצמו, במשך שנה. שולט באורות, מוזיקה, טמפרטורה, דלת הכניסה (זיהוי פנים של אורחים).</li>
+      <li>בדצמבר 2016 פרסם פוסט וסרטון. הקול: מורגן פרימן (אחרי שאנשים הציעו קולות).</li>
+      <li>הוא עצמו כתב שהסרטון הוא "סיכום משעשע ולא הדגמה חיה".</li>
+      <li><b>הנקודה:</b> ב-2016 — אחד האנשים העשירים בעולם, שנה שלמה של עבודה, וזה עדיין עשה רק דברים פשוטים.</li>
+    </ul>
+    <p>מקור: הפוסט "Building Jarvis" (19.12.2016) — ראה SOURCES.md.</p>
+  </div></aside>
+</section>
+
+<section id="today" data-id="today">
+  <h2>והיום? <span class="muted en" style="font-size:.6em">2026</span></h2>
+  <div class="grid-5" style="width:1180px">
+    <div class="fragment rise stack"><div class="m" data-m="today_voice" style="width:100%;height:300px"></div><h3>🎙️ מדבר</h3></div>
+    <div class="fragment rise stack"><div class="m" data-m="today_code" style="width:100%;height:300px"></div><h3>💻 מתכנת</h3></div>
+    <div class="fragment rise stack"><div class="m" data-m="today_image" style="width:100%;height:300px"></div><h3>🖼️ מצייר</h3></div>
+    <div class="fragment rise stack"><div class="m" data-m="today_video" data-loop data-muted data-play-on-show style="width:100%;height:300px"></div><h3>🎬 מסריט</h3></div>
+    <div class="fragment rise stack"><div class="m" data-m="today_music" style="width:100%;height:300px"></div><h3>🎵 מלחין</h3></div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:11–0:13</span> · "מה שלקח לצוקרברג שנה — היום כל אחד מכם יכול לעשות מהטלפון. ובחינם."</p>
+    <ul>
+      <li>מדברים איתו בקול — והוא עונה בקול, בעברית.</li>
+      <li>כותב קוד — <b>את המצגת הזאת בניתי בשיחה עם AI</b> (תגלו בסוף מה עוד).</li>
+      <li>תמונות, וידאו, מוזיקה — מתיאור במילים.</li>
+    </ul>
+    <p>שאלה לכיתה: "מי מכם השתמש השבוע בבינה מלאכותית? למה?"</p>
+  </div></aside>
+</section>
+
+<!-- =========================================================
+     חלק ג׳ — מה זה בינה מלאכותית + היסטוריה
+     ========================================================= -->
+
+<section id="what-is" data-id="what-is">
+  <div data-demo="ambient" style="position:absolute;inset:0;opacity:.5"></div>
+  <div class="above">
+    <div class="kicker">אז מה זה בעצם?</div>
+    <h2 style="font-size:3em">מכונה שלומדת <span class="grad">דפוסים</span></h2>
+    <p class="fragment rise big">מתוך <b class="amber">המון</b> דוגמאות</p>
+    <p class="fragment rise big muted" style="margin-top:.6em">היא לא <b class="pink">"מבינה"</b> כמו בן אדם</p>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:13–0:14</span> · ההגדרה הכי פשוטה: תוכנה שלא כתבו לה את החוקים — נתנו לה המון דוגמאות, והיא מצאה בהן דפוסים לבד.</p>
+    <p>דוגמה: לא כותבים לה "לחתול יש אוזניים משולשות". מראים לה מיליון תמונות של חתולים ושל כלבים — והיא מוצאת לבד מה מבדיל.</p>
+    <p>"מבינה"? היא מצוינת בלזהות דפוסים ולהמשיך אותם. אין לה חוויות, רגשות או כוונה. היא יכולה להישמע חכמה מאוד — ולטעות בדבר שילד בן 5 יודע.</p>
+  </div></aside>
+</section>
+
+<section id="be-the-model" data-id="be-the-model">
+  <div class="kicker">רגע — אתם המודל</div>
+  <p class="huge en" style="font-size:3.4em">2, 4, 8, 16, <span class="fragment amber">32</span></p>
+  <p class="big fragment" style="margin-top:.6em">"אחרי החושך בא ה<span class="fragment amber">אור</span>"</p>
+  <p class="big fragment" style="margin-top:.6em">"פיצה עם <span class="fragment amber">…?</span>"</p>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:14–0:15</span> · משחק מהיר. הם צועקים את ההמשך.</p>
+    <p>"מה עשיתם עכשיו? לא חישבתם — זיהיתם דפוס שראיתם המון פעמים. זה בדיוק מה שהמודל עושה, רק על כל הטקסט באינטרנט."</p>
+    <p>"פיצה עם…?" — אין תשובה אחת נכונה! (זיתים? אננס? 😄) → זה בדיוק העניין: הוא בוחר את מה שהכי <i>סביר</i>, לא את מה ש<i>נכון</i>. נחזור לזה.</p>
+  </div></aside>
+</section>
+
+<section id="timeline" data-id="timeline">
+  <h2>איך הגענו לכאן?</h2>
+  <div class="timeline">
+    <div class="tl fragment rise"><div class="dot"></div><div class="y">1950</div><div class="w">טיורינג: מכונה יכולה לחשוב?</div><span class="ico">🤔</span></div>
+    <div class="tl fragment rise"><div class="dot"></div><div class="y">1956</div><div class="w">דרטמות׳: נולד השם</div><span class="ico">🏫</span></div>
+    <div class="tl fragment rise"><div class="dot"></div><div class="y">1997</div><div class="w">Deep Blue מנצח בשחמט</div><span class="ico">♟️</span></div>
+    <div class="tl fragment rise"><div class="dot"></div><div class="y">2016</div><div class="w">AlphaGo מנצח בגו</div><span class="ico">⚫</span></div>
+    <div class="tl fragment rise"><div class="dot"></div><div class="y">2017</div><div class="w">Transformer</div><span class="ico">🔀</span></div>
+    <div class="tl fragment rise"><div class="dot"></div><div class="y">2022</div><div class="w">ChatGPT</div><span class="ico">💬</span></div>
+    <div class="tl fragment rise"><div class="dot"></div><div class="y">2024</div><div class="w">פרס נובל</div><span class="ico">🏅</span></div>
+    <div class="tl now fragment rise"><div class="dot"></div><div class="y">היום</div><div class="w">סוכנים</div><span class="ico">🤖</span></div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:15–0:16</span> · מפה מהירה. כל לחיצה — נקודה. לא מסבירים כאן; השקפים הבאים עוברים על הרגעים הגדולים.</p>
+    <p>שימו לב לקצב: 50 שנה של כמעט כלום — ואז ב-10 השנים האחרונות הכל קורה.</p>
+  </div></aside>
+</section>
+
+<section id="turing" data-id="turing">
+  <div class="row" style="width:1160px;align-items:center;gap:56px">
+    <div class="m" data-m="turing" style="width:420px;height:540px;flex:none"></div>
+    <div class="col" style="text-align:right">
+      <div class="yearmark" style="position:static;text-align:right;font-size:110px">1950</div>
+      <h2 style="text-align:right">אלן טיורינג</h2>
+      <p class="big en" style="text-align:right">“Can machines think?”</p>
+      <p class="fragment rise muted" style="text-align:right">משחק החיקוי: אם אי אפשר להבדיל בצ׳אט בין מכונה לאדם…</p>
+    </div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:16–0:17</span> · אלן טיורינג, מתמטיקאי בריטי (גם פיצח את האניגמה במלחמת העולם השנייה). ב-1950 כתב מאמר שמתחיל ב"אני מציע לשקול את השאלה: האם מכונות יכולות לחשוב?"</p>
+    <p>במקום להתווכח מה זה "לחשוב", הציע משחק: שופט מתכתב עם אדם ועם מכונה. אם הוא לא מצליח לדעת מי זה מי — המכונה "עברה". (מבחן טיורינג).</p>
+    <p>שאלה: "היום — הייתם מצליחים להבדיל?" (רוב האנשים כבר לא תמיד מצליחים).</p>
+    <p>שנה לאחר מכן (1956): כנס בקולג׳ דרטמות׳ בארה״ב — ההצעה לכנס היא המקום שבו מופיע לראשונה השם "בינה מלאכותית".</p>
+  </div></aside>
+</section>
+
+<section id="deepblue" data-id="deepblue">
+  <div class="m full" data-m="deepblue"></div>
+  <div class="yearmark">1997</div>
+  <div class="caption">
+    <div class="t">Deep Blue מנצח את אלוף העולם בשחמט</div>
+    <div class="s fragment">כוח חישוב: ~200 מיליון מצבים בשנייה. אבל ידע רק שחמט.</div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:17–0:18</span> · מחשב-על של IBM ניצח את גארי קספרוב, אלוף העולם, בקרב של 6 משחקים (3.5–2.5), מאי 1997.</p>
+    <p>הוא לא "למד" כמו היום — בעיקר בדק מהר המון אפשרויות (בערך 200 מיליון מצבים בשנייה, לפי בריטניקה). ולא ידע לעשות שום דבר חוץ משחמט.</p>
+  </div></aside>
+</section>
+
+<section id="alphago" data-id="alphago">
+  <div class="m full" data-m="alphago"></div>
+  <div class="yearmark">2016</div>
+  <div class="caption">
+    <div class="t">AlphaGo מנצח בגו — 4 מול 1</div>
+    <div class="s fragment">מהלך 37: מהלך ששום אדם לא היה משחק. ועבד.</div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:18–0:19</span> · גו: משחק סיני עתיק, יש בו יותר מצבים אפשריים מאשר אטומים ביקום — אי אפשר "לבדוק הכל" כמו בשחמט.</p>
+    <p>מרץ 2016, סיאול: AlphaGo של DeepMind ניצח את לי סה-דול, מגדולי השחקנים בעולם, 4–1. הפעם הראשונה שמחשב ניצח מקצוען בדרגה הכי גבוהה בלי פור.</p>
+    <p><b>מהלך 37</b> במשחק השני: המפרשנים חשבו שזו טעות. התברר שזה מהלך גאוני. לי סה-דול קם מהשולחן לכמה דקות. AlphaGo לא העתיק בני אדם — <b>הוא למד מדוגמאות ומאימון מול עצמו</b>.</p>
+    <p>ולי סה-דול ניצח במשחק הרביעי — האדם היחיד שניצח את הגרסה הזאת בטורניר.</p>
+  </div></aside>
+</section>
+
+<section id="transformer" data-id="transformer">
+  <div class="kicker en">2017 · “Attention Is All You Need”</div>
+  <h2>הטריק: <span class="grad">תשומת לב</span></h2>
+  <div class="attn interactive" data-demo="attention"><svg></svg><div class="words"></div></div>
+  <p class="small" style="margin-top:14px">לחצו על מילה · <span class="muted">המחשה</span></p>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:19–0:21</span> · 2017: חוקרים בגוגל פרסמו מאמר בשם "Attention Is All You Need" — ובו ארכיטקטורה בשם <b>Transformer</b>. ה-T ב-ChatGPT = Transformer.</p>
+    <p>הרעיון: כשהמודל קורא מילה, הוא "מסתכל" על כל המילים האחרות במשפט ומחליט לאילו להקשיב יותר.</p>
+    <p>הדגמה: "הכלב רדף אחרי החתול כי <b>הוא</b> היה רעב" — מי רעב? לחצו על "הוא": הקווים העבים הולכים ל"הכלב". (העוביים כאן הם המחשה שלי, לא מודל אמיתי.)</p>
+    <p>שאלה: "ואם המשפט היה 'כי הוא היה מהיר'?" — המשמעות משתנה, והמודל צריך את ההקשר.</p>
+  </div></aside>
+</section>
+
+<section id="chatgpt" data-id="chatgpt">
+  <div class="m full" data-m="chatgpt_shot" style="opacity:.25"></div>
+  <div class="above">
+    <div class="kicker en">30.11.2022 · ChatGPT</div>
+    <div class="counter" data-demo="counter" data-target="100000000">0</div>
+    <p class="big">משתמשים — בתוך <span class="amber">כחודשיים</span></p>
+    <p class="small">הערכה של UBS / Similarweb, ינואר 2023</p>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:21–0:22</span> · 30 בנובמבר 2022: OpenAI משחררת את ChatGPT כ"תצוגה מקדימה" חינמית. תוך כחודשיים — בערך 100 מיליון משתמשים (הערכה של בנק UBS לפי Similarweb, לא מספר רשמי). באותה תקופה זו נחשבה האפליקציה שצמחה הכי מהר אי פעם.</p>
+    <p>לטיקטוק לקח בערך 9 חודשים, לאינסטגרם יותר משנתיים (לפי Sensor Tower, כפי שצוטט ברויטרס).</p>
+  </div></aside>
+</section>
+
+<section id="nobel" data-id="nobel">
+  <div class="row" style="width:1180px;align-items:center;gap:40px">
+    <div class="m" data-m="nobel" style="width:380px;height:500px;flex:none"></div>
+    <div class="col stack" style="align-items:stretch">
+      <div class="yearmark" style="position:static;text-align:right;font-size:100px">2024</div>
+      <div class="card fragment rise"><h3>🏅 פיזיקה</h3><p style="font-size:1em">הופפילד והינטון — <b>רשתות עצביות</b> מלאכותיות</p></div>
+      <div class="card fragment rise" style="display:flex;gap:18px;align-items:center"><div class="m" data-m="protein" style="width:120px;height:120px;flex:none;border-radius:14px"></div><div><h3>🏅 כימיה</h3><p style="font-size:1em">הסאביס וג׳מפר (AlphaFold) — <b>מבנה חלבונים</b> · בייקר — עיצוב חלבונים</p></div></div>
+    </div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:22–0:23</span> · <b>החיבור לחתני נובל!</b> ב-2024 שני פרסי נובל הלכו לבינה מלאכותית:</p>
+    <ul>
+      <li><b>פיזיקה:</b> ג׳ון הופפילד וג׳פרי הינטון — "על תגליות והמצאות יסוד שמאפשרות למידת מכונה עם רשתות עצביות מלאכותיות".</li>
+      <li><b>כימיה:</b> חצי לדייוויד בייקר (עיצוב חלבונים ממוחשב), חצי לדמיס הסאביס וג׳ון ג׳מפר מ-Google DeepMind (חיזוי מבנה חלבונים — AlphaFold).</li>
+    </ul>
+    <p>למה חלבונים חשובים? כל דבר בגוף — עשוי מחלבונים או נבנה על ידם. לגלות את הצורה של חלבון אחד היה יכול לקחת לחוקרים שנים. AlphaFold חוזה מבנים בדקות.</p>
+    <p>(הסאביס — אותו אחד מ-AlphaGo!)</p>
+  </div></aside>
+</section>
+
+<section id="agents" data-id="agents">
+  <div class="row" style="width:1180px;align-items:center">
+    <div class="col" style="text-align:right">
+      <div class="kicker" style="text-align:right">היום</div>
+      <h2 style="text-align:right">סוכנים</h2>
+      <p class="big" style="text-align:right">לא רק <span class="muted">עונה</span> — גם <span class="amber">עושה</span></p>
+    </div>
+    <div class="loop" data-demo="agent" style="flex:none">
+      <div class="st" style="top:0;left:225px"><span class="emoji">🎯</span>מטרה</div>
+      <div class="st" style="top:130px;left:430px"><span class="emoji">🧠</span>תכנון</div>
+      <div class="st" style="top:320px;left:350px"><span class="emoji">🛠️</span>כלים</div>
+      <div class="st" style="top:320px;left:100px"><span class="emoji">👀</span>בדיקה</div>
+      <div class="st" style="top:130px;left:20px"><span class="emoji">🔁</span>שוב / ✅</div>
+    </div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:23–0:24</span> · צ׳אט רגיל: שאלה → תשובה. <b>סוכן</b>: מקבל מטרה, מתכנן צעדים, משתמש בכלים (חיפוש, כתיבת קוד, דפדפן), בודק אם הצליח — ואם לא, מנסה שוב.</p>
+    <p>דוגמה אמיתית: המצגת הזאת. נתתי מטרה ("תבנה מצגת על AI לכיתה ז׳"), והסוכן חיפש עובדות, כתב קוד, פתח דפדפן ובדק שהשקפים עובדים, ותיקן.</p>
+  </div></aside>
+</section>
+
+<section id="spaghetti" data-id="spaghetti">
+  <h2 style="margin-bottom:.25em">ויל סמית אוכל ספגטי 🍝</h2>
+  <div class="row" style="width:1200px;height:520px">
+    <div class="col" style="position:relative"><div class="m" data-m="spaghetti_2023" style="height:100%"></div><div class="tag">2023</div></div>
+    <span class="fragment video-trigger" data-play="spaghetti_2023"></span>
+    <div class="col fragment" style="position:relative"><div class="m" data-m="spaghetti_now" style="height:100%"></div><div class="tag pink">היום</div></div>
+    <span class="fragment video-trigger" data-play="spaghetti_now"></span>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:24–0:25</span> · סדר הלחיצות: (1) מראים את 2023 → (2) מנגנים את 2023 → (3) צד ימין מופיע → (4) מנגנים את "היום". אפשר גם ללחוץ ישירות על כל וידאו.</p>
+    <p>מרץ 2023: משתמש ב-Reddit (chaindrop) הקליד "Will Smith eating spaghetti" לכלי בשם ModelScope. התוצאה — סיוט מצחיק. זה הפך ל"מבחן" לא-רשמי: כל כלי וידאו חדש נבחן על ויל סמית והספגטי. (בפברואר 2024 ויל סמית עצמו עשה פרודיה.)</p>
+    <p>שאלה: "כמה זמן עבר בין שני הסרטונים?" — שנתיים-שלוש. מה יהיה עוד שנתיים?</p>
+  </div></aside>
+</section>
+
+<section id="opera" data-id="opera">
+  <div class="m full" data-m="opera"></div>
+  <div class="caption">
+    <div class="t en" style="direction:ltr;text-align:right">Théâtre D’opéra Spatial</div>
+    <div class="s">מקום ראשון בתחרות אמנות דיגיטלית · יריד מדינת קולורדו · 2022</div>
+  </div>
+  <div class="tag pink fragment pop" style="font-size:1.4em;top:40px;left:40px">נוצרה ב-AI</div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:25–0:27</span> · קודם רק מראים את התמונה. "אהבתם? מי חושב שזה ציור של אמן?" — ואז לחיצה: "נוצרה ב-AI".</p>
+    <p>אוגוסט 2022: ג׳ייסון אלן, מעצב משחקים מקולורדו, זכה במקום הראשון (בקטגוריית אמנות דיגיטלית, יוצרים מתחילים) ביריד מדינת קולורדו. הפרס: 300 דולר. הוא יצר את התמונה בכלי Midjourney — לדבריו לפחות 624 ניסיונות ותיקונים, ואחר כך עריכה בפוטושופ.</p>
+    <p>אמנים כעסו מאוד. היריד אמר: לא היה חוק שאוסר.</p>
+    <p><b>שאלה לדיון:</b> מי האמן — ג׳ייסון או המכונה? מגיע לו הפרס? (תנו 2–3 תשובות, אין תשובה נכונה.)</p>
+  </div></aside>
+</section>
+
+<section id="built" data-id="built">
+  <h2>מה אנשים כבר בנו</h2>
+  <div class="grid-3" style="width:1180px">
+    <div class="card fragment rise" style="padding:0;overflow:hidden"><div class="m" data-m="protein" style="height:118px;border-radius:0"></div><div style="padding:12px 18px"><h3>🧬 חלבונים</h3><p>מבנים של חלבונים — בדקות</p></div></div>
+    <div class="card fragment rise" style="padding:0;overflow:hidden"><div class="m" data-m="built_car" style="height:118px;border-radius:0"></div><div style="padding:12px 18px"><h3>🚗 רכב בלי נהג</h3><p>מוניות אוטונומיות בכבישים</p></div></div>
+    <div class="card fragment rise" style="padding:0;overflow:hidden"><div class="m" data-m="built_bemyeyes" style="height:118px;border-radius:0"></div><div style="padding:12px 18px"><h3>👁️ Be My Eyes</h3><p>מתאר את העולם לעיוורים</p></div></div>
+    <div class="card fragment rise" style="padding:0;overflow:hidden"><div class="m" data-m="built_song" style="height:118px;border-radius:0"></div><div style="padding:12px 18px"><h3>🎵 שיר מבקשה</h3><p>מילים + לחן + שירה</p></div></div>
+    <div class="card fragment rise" style="padding:0;overflow:hidden"><div class="m" data-m="built_game" style="height:118px;border-radius:0"></div><div style="padding:12px 18px"><h3>🎮 משחק בשיחה</h3><p>בלי לדעת לתכנת</p></div></div>
+    <div class="card fragment rise" style="padding:0;overflow:hidden"><div class="m" data-m="built_robot" style="height:118px;border-radius:0"></div><div style="padding:12px 18px"><h3>🦾 רובוטים</h3><p>שלומדים לזוז ולעבוד</p></div></div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:27–0:28</span> · מהיר, לחיצה לכל אחד, משפט אחד לכל כרטיס:</p>
+    <ul>
+      <li>חלבונים — AlphaFold (נובל 2024).</li>
+      <li>רכב אוטונומי — למשל Waymo, מוניות בלי נהג בכמה ערים בארה״ב.</li>
+      <li>Be My Eyes — אפליקציה לעיוורים ולקויי ראייה. ב-2023 הוסיפו "Be My AI" (על בסיס GPT-4): מצלמים — והוא מתאר מה יש בתמונה.</li>
+      <li>שיר — כותבים "שיר רוק על חתול שמפחד ממבחנים" ומקבלים שיר עם שירה.</li>
+      <li>משחק — בונים בשיחה (תראו אחד בסוף).</li>
+      <li>רובוטים — לומדים תנועה מדוגמאות ומסימולציות.</li>
+    </ul>
+  </div></aside>
+</section>
+
+<!-- =========================================================
+     חלק ד׳ — מאחורי הקלעים
+     ========================================================= -->
+
+<section id="under-hood" data-id="under-hood">
+  <div data-demo="ambient" style="position:absolute;inset:0"></div>
+  <div class="above">
+    <div class="kicker">חלק 2</div>
+    <h1 style="font-size:3.4em">מאחורי <span class="grad">הקלעים</span></h1>
+    <p class="big muted">איך מכונה "קוראת את כל האינטרנט"?</p>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif"><p>⏱ <span dir="ltr">0:28</span> · מעבר. "עכשיו נפתח את המכסה."</p></div></aside>
+</section>
+
+<section id="pipeline" data-id="pipeline">
+  <h2 style="margin-bottom:.1em">איך הוא <span class="amber">"קרא את כל האינטרנט"</span></h2>
+  <div class="pipe">
+    <div class="stage fragment" data-fragment-index="1"><span class="emoji">🕷️</span><span class="t">זחלן</span><span class="s">תוכנה שעוברת מקישור לקישור ושומרת דפים</span>
+      <span class="flying" style="animation-delay:0s">📄</span><span class="flying" style="animation-delay:.6s">📰</span><span class="flying" style="animation-delay:1.2s">📄</span><span class="flying" style="animation-delay:1.8s">🗞️</span></div>
+    <span class="arrow fragment" data-fragment-index="2">←</span>
+    <div class="stage fragment" data-fragment-index="2"><span class="emoji">🗄️</span><span class="t en">Common Crawl</span><span class="s">ארכיון ענק וחינמי של דפי אינטרנט, מ-2008</span></div>
+    <span class="arrow fragment" data-fragment-index="3">←</span>
+    <div class="stage fragment" data-fragment-index="3"><span class="emoji">🧹</span><span class="t">ניקוי</span><span class="s"><span class="junk">ספאם</span> · <span class="junk">כפילויות</span> · <span class="junk">זבל</span> · <span class="junk">מידע אישי</span></span></div>
+    <span class="arrow fragment" data-fragment-index="4">←</span>
+    <div class="stage fragment" data-fragment-index="4"><span class="emoji">✂️</span><span class="t">טוקנים</span><span class="s" style="direction:rtl"><span class="tok" style="background:#4de1ff;font-size:16px;padding:2px 6px">ה</span> <span class="tok" style="background:#ffc933;font-size:16px;padding:2px 6px">חתול</span> <span class="tok" style="background:#ff8fb0;font-size:16px;padding:2px 6px">ים</span></span></div>
+    <span class="arrow fragment" data-fragment-index="5">←</span>
+    <div class="stage fragment" data-fragment-index="5"><span class="emoji">🧠</span><span class="t">אימון</span><span class="s">חודשים על אלפי שבבים</span></div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:28–0:30</span> · <b>הדגמה 1 (מונפשת).</b> לחיצה = שלב.</p>
+    <ol>
+      <li><b>זחלן (crawler):</b> תוכנה שנכנסת לדף, שומרת אותו, עוברת לכל הקישורים שבו — וחוזרת חלילה. מיליארדי דפים.</li>
+      <li><b>Common Crawl:</b> ארגון ללא מטרות רווח שעושה בדיוק את זה ומפרסם בחינם ארכיון ענק של האינטרנט (סורק מ-2008; כל חודש מתווספים מיליארדי דפים). הרבה מודלים התאמנו על חלקים ממנו. למשל ב-GPT-3 (2020), כ-60% מתערובת האימון הגיעה מגרסה מסוננת של Common Crawl.</li>
+      <li><b>ניקוי:</b> רוב האינטרנט זה זבל — פרסומות, ספאם, דפים כפולים. מסננים, מורידים כפילויות, מנסים להסיר מידע אישי ותוכן פוגעני. (שאלה: "מה יקרה אם לא ננקה?" → הוא ילמד גם את הזבל.)</li>
+      <li><b>טוקנים:</b> המחשב לא קורא מילים — הוא חותך את הטקסט לחתיכות קטנות, ולכל חתיכה יש מספר. (הדגמה בשקף הבא.)</li>
+      <li><b>אימון:</b> על אלפי שבבים מיוחדים, במשך שבועות-חודשים.</li>
+    </ol>
+  </div></aside>
+</section>
+
+<section id="tokens" data-id="tokens">
+  <h2>המחשב לא קורא מילים. הוא קורא <span class="amber">טוקנים</span></h2>
+  <div class="demo interactive" data-demo="tokens" style="width:1100px;position:relative;text-align:right">
+    <span class="demo-label">המחשה · כל מודל חותך אחרת</span>
+    <input class="tok-input" type="text" value="אני אוהב פיצה עם זיתים 🍕" aria-label="טקסט">
+    <div class="tok-out"></div>
+    <div class="tok-stats"><span>תווים <b data-c>0</b></span><span>מילים <b data-w>0</b></span><span>טוקנים <b data-n class="amber">0</b></span></div>
+    <div class="ctrls">
+      <button class="btn small" data-sample="I love pizza with olives">באנגלית</button>
+      <button class="btn small" data-sample="והתלמידים כשהלכו לבית הספר שמעו מוזיקה">משפט ארוך</button>
+      <button class="btn small" data-sample="supercalifragilisticexpialidocious">מילה מוזרה</button>
+    </div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:30–0:32</span> · <b>הדגמה 2 (אינטראקטיבית).</b> בקשו מתלמיד להגיד משפט, והקלידו אותו.</p>
+    <ul>
+      <li>כל צבע = טוקן אחד. המספר הקטן מתחת = ה"מספר" של הטוקן. המודל רואה רק רשימת מספרים.</li>
+      <li>מילים נפוצות = טוקן אחד. מילים נדירות נחתכות לחתיכות.</li>
+      <li>"באנגלית" מול עברית — לרוב בעברית יוצאים יותר טוקנים לאותו משפט. (מחקר: Petrov ואחרים, NeurIPS 2023 — אותו טקסט בשפות שונות יכול לצאת בכמות טוקנים שונה מאוד.) → <b>זה משנה, כי משלמים לפי טוקנים.</b></li>
+    </ul>
+    <p>⚠️ החותך כאן הוא המחשה שבניתי, לא החותך האמיתי של מודל מסוים. אם שואלים — להגיד את זה.</p>
+  </div></aside>
+</section>
+
+<section id="nextword" data-id="nextword">
+  <h2>המשחק שלו: <span class="grad">נחשו את המילה הבאה</span></h2>
+  <div class="demo interactive" data-demo="nextword" style="width:1100px;position:relative;text-align:right">
+    <span class="demo-label">המחשה · הסתברויות לדוגמה</span>
+    <div class="nw-sentence"></div>
+    <div class="bars"></div>
+    <div class="ctrls">
+      <button class="btn primary" data-act="next">✨ מילה הבאה</button>
+      <button class="btn" data-act="reset">↺</button>
+      <button class="btn small" data-act="swap">משפט אחר</button>
+      <label style="margin-inline-start:20px">יצירתיות (טמפרטורה) <input type="range" min="0.2" max="2" step="0.1" value="1"> <b data-temp class="en">1.0</b></label>
+    </div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:32–0:35</span> · <b>הדגמה 3 — הלב של הכל.</b> מודל שפה עושה דבר אחד: מקבל טקסט ומחשב לכל מילה אפשרית — כמה סביר שהיא הבאה. בוחר אחת. מוסיף. וחוזר. ככה נכתבת כל תשובה — מילה אחרי מילה (טוקן אחרי טוקן).</p>
+    <ul>
+      <li>לחיצה על "מילה הבאה" = הגרלה לפי ההסתברויות. אפשר גם ללחוץ על פס כדי לבחור.</li>
+      <li>תנו לכיתה להצביע על המילה לפני שלוחצים.</li>
+      <li><b>טמפרטורה:</b> נמוכה (0.2) = תמיד בוחר את הכי סביר → משעמם וצפוי. גבוהה (2) = מגריל גם דברים לא סבירים → יצירתי... ולפעמים שטויות ("מקרר"!).</li>
+      <li>"משפט אחר" — דוגמת הקשת.</li>
+    </ul>
+    <p><b>המשפט החשוב:</b> "הוא לא בודק מה <i>נכון</i>. הוא בוחר מה <i>סביר</i>." (נחזור לזה בהזיות.)</p>
+    <p>⚠️ האחוזים כאן הומצאו על ידי לצורך ההמחשה.</p>
+  </div></aside>
+</section>
+
+<section id="train" data-id="train">
+  <h2 style="margin-bottom:.2em">איך הוא <span class="amber">לומד</span>? טועה, ומכוונן</h2>
+  <div class="demo interactive train-wrap" data-demo="train" style="width:1180px;position:relative">
+    <span class="demo-label">מודל זעיר אמיתי · 12 משפטים</span>
+    <div>
+      <div class="qa">שאלה למודל: <select class="btn small" aria-label="משפט">
+        <option>הארנב אוכל</option><option>החתול שותה</option><option>השמש זורחת</option><option>הכלב אוכל</option><option>הינשוף ער</option>
+      </select></div>
+      <div class="qa guess" data-guess style="margin-top:8px"></div>
+      <div class="bars"></div>
+      <div class="qa" data-last style="font-size:20px;margin-top:12px;min-height:60px"></div>
+    </div>
+    <div>
+      <canvas class="loss"></canvas>
+      <div class="qa" style="font-size:20px;margin-top:8px">"כפתורים" (פרמטרים) שזזים: <span class="muted">צעדים: <b data-steps>0</b></span></div>
+      <div class="knobs"></div>
+      <div class="ctrls" style="justify-content:flex-start">
+        <button class="btn" data-act="step">צעד אימון</button>
+        <button class="btn primary" data-act="run">▶ אמן ×60</button>
+        <button class="btn" data-act="reset">↺</button>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:35–0:38</span> · <b>הדגמה 4 — זה מודל אמיתי שלומד באמת</b> (קטנטן: 12 משפטים, מאות פרמטרים).</p>
+    <ol>
+      <li>בהתחלה (אחרי ↺) — המודל מנחש בערך באקראי. "הארנב אוכל ___"? אולי "בלילה".</li>
+      <li>"צעד אימון": הוא לוקח משפט, מכסה את המילה האחרונה, מנחש. <b>טעה?</b> כל הכפתורים זזים טיפה לכיוון שהיה נותן את התשובה הנכונה.</li>
+      <li>"אמן ×60": רואים את הגרף (כמה הוא טועה) יורד, ואת הניחוש משתנה ל"גזר".</li>
+    </ol>
+    <p><b>במודלים אמיתיים:</b> אותו רעיון בדיוק — רק עם מיליארדי כפתורים (פרמטרים), טריליוני טוקנים, וחודשים של חישוב. אף אחד לא כותב לו "ארנב אוכל גזר". הוא מגלה את זה מהדוגמאות.</p>
+  </div></aside>
+</section>
+
+<section id="rlhf" data-id="rlhf">
+  <h2 style="margin-bottom:.2em">ואז בני אדם <span class="green">מלמדים אותו נימוס</span></h2>
+  <div class="demo interactive" data-demo="rlhf" style="width:1100px;position:relative">
+    <span class="demo-label">איזו תשובה טובה יותר? לחצו</span>
+    <p class="big" style="margin:4px 0 18px">❓ <b data-q></b></p>
+    <div class="ab">
+      <div class="card"><div class="pill">א</div><p data-a style="font-size:26px;color:var(--ink)"></p></div>
+      <div class="card"><div class="pill">ב</div><p data-b style="font-size:26px;color:var(--ink)"></p></div>
+    </div>
+    <p data-msg style="font-size:24px;margin-top:16px;min-height:36px" class="green">&nbsp;</p>
+    <div class="ctrls"><button class="btn" data-act="next">שאלה הבאה ←</button><span class="muted">דירוגים: <b data-count>0</b></span></div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:38–0:40</span> · אחרי שהוא "קרא את האינטרנט", הוא יודע להשלים טקסט — אבל לא בהכרח לעזור, ולא בהכרח בנימוס. האינטרנט מלא גם בגסות ובשקרים.</p>
+    <p>אז מגיע <b>כיוונון על ידי בני אדם</b>: אנשים רואים שתי תשובות ובוחרים את הטובה. מאלפי דירוגים כאלה המודל לומד להעדיף תשובות מועילות, מנומסות ובטוחות.</p>
+    <p>הכיתה מצביעה, ואתם לוחצים. בשאלה 3 — שימו לב: התשובה ה"טובה" היא דווקא הסירוב.</p>
+  </div></aside>
+</section>
+
+<section id="scale" data-id="scale">
+  <h2>כמה הוא קרא?</h2>
+  <div class="row" style="width:1100px;align-items:stretch;margin-top:20px">
+    <div class="card col fragment rise" style="text-align:center"><span class="emoji">🧑</span><h3>בן אדם</h3><p style="font-size:1em">קורא יום ולילה, בלי לישון, כל החיים</p><p class="big amber">80 שנה</p></div>
+    <div class="card col fragment rise" style="text-align:center"><span class="emoji">🤖</span><h3 class="en">GPT-3 (2020)</h3><p style="font-size:1em">כמות הטקסט שהתאמן עליה</p><p class="big amber">~1,700 שנה</p><p>של קריאה רצופה</p></div>
+    <div class="card col fragment rise" style="text-align:center"><span class="emoji">🚀</span><h3>מודלים של היום</h3><p style="font-size:1em">פי עשרות יותר טקסט</p><p class="big pink">עשרות אלפי שנים</p></div>
+  </div>
+  <p class="small fragment" style="margin-top:18px">חישוב גס: 300 מיליארד טוקנים · ¾ מילה לטוקן · 250 מילים בדקה, 24/7</p>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:40–0:41</span> · <b>קנה מידה — בלי מספרים מדויקים שאי אפשר לבדוק.</b> החישוב שלי (גס, לסדר גודל):</p>
+    <ul>
+      <li>GPT-3 (2020) — לפי המאמר, אימון על כ-300 מיליארד טוקנים. טוקן ≈ ¾ מילה (כלל אצבע של OpenAI לאנגלית) → כ-225 מיליארד מילים.</li>
+      <li>אדם שקורא 250 מילים בדקה, 24 שעות ביממה: כ-131 מיליון מילים בשנה → 225 מיליארד ÷ 131 מיליון ≈ <b>1,700 שנה</b>.</li>
+      <li>Llama 3 של Meta (2024) — "יותר מ-15 טריליון טוקנים" לפי Meta. פי 50 מ-GPT-3 → <b>עשרות אלפי שנים</b>. על מודלים סגורים החברות לא מפרסמות מספרים, אז לא אומרים.</li>
+    </ul>
+    <p>שאלה: "ובכל זאת — ילד בן 4 לומד לדבר מהרבה פחות. מה זה אומר?" (המוח שלנו לומד הרבה יותר ביעילות.)</p>
+  </div></aside>
+</section>
+
+<section id="cost" data-id="cost">
+  <h2>כל שאלה <span class="amber">עולה כסף</span></h2>
+  <div class="demo interactive" data-demo="cost" style="width:1100px">
+    <div class="cost-flow">
+      <div class="node"><span class="emoji">💬</span><div class="t">השאלה שלך</div></div>
+      <div class="pulse-line"></div>
+      <div class="node" style="width:300px"><span class="emoji">🏭</span><div class="t">חוות שרתים</div><div class="chips"></div></div>
+      <div class="pulse-line" style="transform:scaleX(-1)"></div>
+      <div class="node"><span class="emoji">⚡</span><div class="t">חשמל + שבבים + מים לקירור</div></div>
+    </div>
+    <div class="coins" style="margin-top:16px"></div>
+    <div class="ctrls">
+      <button class="btn" data-act="short">"מה השעה בטוקיו?"</button>
+      <button class="btn" data-act="image">"צייר לי דרקון"</button>
+      <button class="btn primary" data-act="long">"כתוב לי עבודה של 10 עמודים"</button>
+      <button class="btn small ghost" data-act="clear">↺</button>
+    </div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:41–0:42</span> · "גוגל זה חינם, למה AI עולה כסף?" — כי כל תשובה, כל טוקן, מחושבת מחדש על שבבים יקרים בחוות שרתים ענקיות שצורכות הרבה חשמל (ומים לקירור).</p>
+    <p>לחצו על הכפתורים: שאלה קצרה → מעט שבבים, מטבע אחד. עבודה ארוכה → הרבה שבבים, הרבה מטבעות. (המחשה איכותית — לא מחירים אמיתיים.)</p>
+    <p>לכן: יש מגבלות בגרסה החינמית, ולכן משלמים לפי טוקנים. וגם — <b>אם משהו בחינם, שאלו את עצמכם מי משלם</b> (נחזור לזה בצד המסוכן).</p>
+  </div></aside>
+</section>
+
+<section id="frozen" data-id="frozen">
+  <h2>כשהוא עונה — הוא <span class="pink">לא</span> גולש באינטרנט</h2>
+  <div class="freeze" style="width:1150px;margin-top:20px">
+    <div class="card fragment rise"><div class="ice">🧊</div><h3>ידע קפוא</h3><p style="font-size:.9em">מה שקרא עד יום האימון. אחרי זה — לא יודע.</p></div>
+    <div class="card fragment rise"><div class="ice">🔎</div><h3>+ כלי חיפוש</h3><p style="font-size:.9em">חלק מהכלים יכולים לחפש — ואז מצרפים קישורים</p></div>
+    <div class="card fragment rise"><div class="ice">✅</div><h3>אז מה עושים?</h3><p style="font-size:.9em">שואלים: "מאיפה זה?" ובודקים את המקור</p></div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:42–0:44</span> · טעות נפוצה: "הוא חיפש את זה עכשיו באינטרנט". לא. המודל עצמו הוא קובץ ענק של מספרים (הפרמטרים) שנקבעו באימון. הידע שלו <b>קפוא</b> בתאריך מסוים.</p>
+    <p>שאלו אותו מי ניצח במשחק אתמול — הוא לא יכול לדעת, אלא אם הכלי שבו אתם משתמשים מחובר גם לחיפוש. ואז רואים "מחפש…" וקישורים.</p>
+    <p>כלל: אם אין קישור — זה מהזיכרון שלו. ואם זה מהזיכרון — זה יכול להיות לא נכון או לא מעודכן.</p>
+    <p>💡 כאן בערך נגמר השיעור הראשון — השקף הבא הוא ההפסקה.</p>
+  </div></aside>
+</section>
+
+<section id="break" data-id="break">
+  <div class="kicker">הפסקה</div>
+  <div class="countdown interactive" data-minutes-from="breakMinutes">5:00</div>
+  <p class="muted">לחיצה על השעון מפעילה</p>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif"><p>⏱ <span dir="ltr">0:45</span> (בין השיעורים) · אם אין הפסקה — מדלגים (לחיצה). השעון מתחיל רק כשלוחצים עליו. הזמן נקבע ב-<code>js/personal.js</code> (breakMinutes).</p></div></aside>
+</section>
+
+<!-- =========================================================
+     חלק ה׳ — הזיות
+     ========================================================= -->
+
+<section id="halluc" data-id="halluc">
+  <div class="m full" data-m="halluc_shot" style="opacity:.3"></div>
+  <div class="above">
+    <h1 style="font-size:4em">הוא טועה.</h1>
+    <h1 class="fragment pop pink" style="font-size:4em">בביטחון.</h1>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:45–0:46</span> · לזה קוראים <b>הזיות</b> (hallucinations): המודל ממציא דברים — שמות, תאריכים, ציטוטים, מקורות — ומציג אותם בביטחון מלא.</p>
+    <p>למה? זוכרים את "המילה הבאה"? הוא בוחר מה <i>נשמע</i> סביר. משפט שקרי יכול להישמע סביר מאוד.</p>
+    <p>אם הבאת צילום מסך אמיתי של טעות (<code>media/img/hallucination.jpg</code>) — הוא ברקע.</p>
+  </div></aside>
+</section>
+
+<section id="lawyers" data-id="lawyers">
+  <div class="story" style="width:1160px">
+    <div>
+      <div class="kicker" style="text-align:right">סיפור אמיתי · ניו יורק · 2023</div>
+      <h2 style="text-align:right">עורכי הדין שסמכו על הצ׳אט</h2>
+      <p class="fragment rise" style="text-align:right">הגישו לבית המשפט מסמך עם פסקי דין <b class="pink">שלא קיימים</b></p>
+      <p class="fragment rise" style="text-align:right">הצ׳אט המציא אותם — עם שמות, מספרים וציטוטים</p>
+    </div>
+    <div class="stack">
+      <div class="big-num fragment pop amber" style="text-align:center">$5,000</div>
+      <p class="fragment rise">קנס · והתיק נדחה</p>
+    </div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:46–0:47</span> · התיק Mata v. Avianca (בית משפט פדרלי בניו יורק). עורכי הדין השתמשו ב-ChatGPT למחקר משפטי, והוא המציא פסקי דין שלמים. כשהשופט שאל — הם עמדו מאחורי זה. ביוני 2023 השופט קנס אותם ב-5,000 דולר.</p>
+    <p>השופט כתב שאין בעיה עקרונית להשתמש ב-AI — אבל <b>האחריות לבדוק היא שלך</b>.</p>
+  </div></aside>
+</section>
+
+<section id="game-intro" data-id="game-intro">
+  <div data-demo="ambient" style="position:absolute;inset:0;opacity:.6"></div>
+  <div class="above">
+    <div class="kicker">משחק</div>
+    <h1 style="font-size:4.2em"><span class="green">אמת</span> או <span class="pink">AI</span>?</h1>
+    <p class="big" style="margin-top:.5em">👍 צילום אמיתי &nbsp;&nbsp;·&nbsp;&nbsp; 🤖 נוצר ב-AI</p>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:47–0:52</span> · 6 סבבים. בכל סבב: מראים תמונה, כולם מצביעים (יד אחת למעלה = אמיתי, שתי ידיים = AI), ואז לחיצה חושפת.</p>
+    <p>אפשר לחלק לשתי קבוצות ולספור נקודות על הלוח.</p>
+  </div></aside>
+</section>
+
+<section id="r1" data-id="r1">
+  <div class="m full" data-m="r1"></div><div class="round">סבב 1/6</div>
+  <div class="vote"><span>👍 אמיתי</span><span>🤖 AI</span></div>
+  <div class="verdict real fragment">אמיתי</div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif"><p>תשובה: <b>אמיתי</b>. "מה גרם לכם לחשוב שזה AI?" — לפעמים המציאות נראית מושלמת מדי.</p></div></aside>
+</section>
+<section id="r2" data-id="r2">
+  <div class="m full" data-m="r2"></div><div class="round">סבב 2/6</div>
+  <div class="vote"><span>👍 אמיתי</span><span>🤖 AI</span></div>
+  <div class="verdict ai fragment">AI</div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif"><p>תשובה: <b>AI</b> (תמונה שיצרת). ספר באיזה כלי ומה כתבת. "כמה זמן זה לקח לי? 20 שניות."</p></div></aside>
+</section>
+<section id="r3" data-id="r3">
+  <div class="m full" data-m="r3"></div><div class="round">סבב 3/6</div>
+  <div class="vote"><span>👍 אמיתי</span><span>🤖 AI</span></div>
+  <div class="verdict real fragment">אמיתי</div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif"><p>תשובה: <b>אמיתי</b>.</p></div></aside>
+</section>
+<section id="r4" data-id="r4">
+  <div class="m full" data-m="r4"></div><div class="round">סבב 4/6</div>
+  <div class="vote"><span>👍 אמיתי</span><span>🤖 AI</span></div>
+  <div class="verdict ai fragment">AI</div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif"><p>תשובה: <b>AI</b>. חפשו יחד סימנים: טקסט מעוות, אצבעות, צללים לא הגיוניים. אבל — הכלים משתפרים, והסימנים נעלמים.</p></div></aside>
+</section>
+<section id="r5" data-id="r5">
+  <div class="m full" data-m="r5_pope"></div><div class="round">סבב 5/6</div>
+  <div class="vote"><span>👍 אמיתי</span><span>🤖 AI</span></div>
+  <div class="verdict ai fragment">AI</div>
+  <div class="verdict-note fragment"><span>Midjourney · מרץ 2023 · מיליונים האמינו</span></div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>תשובה: <b>AI</b>. האפיפיור פרנציסקוס במעיל נפוח לבן — מרץ 2023. נוצר ב-Midjourney על ידי פועל בניין מאזור שיקגו (פבלו חאווייר) "כי זה נראה לו מצחיק". הוא פרסם בקבוצת פייסבוק וב-Reddit, וזה התפשט בכל העולם. מיליוני אנשים האמינו.</p>
+    <p>הוא עצמו אמר אחר כך שהפחיד אותו כמה מהר אנשים האמינו בלי לשאול.</p>
+  </div></aside>
+</section>
+<section id="r6" data-id="r6">
+  <div class="m full" data-m="r6"></div><div class="round">סבב 6/6</div>
+  <div class="vote"><span>👍 אמיתי</span><span>🤖 AI</span></div>
+  <div class="verdict ai fragment">AI</div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif"><p>תשובה: <b>AI</b>. "מי צדק בכל ה-6?" (כמעט אף אחד). → המסקנה: <b>אי אפשר לסמוך על העיניים.</b> צריך לבדוק את המקור.</p></div></aside>
+</section>
+
+<section id="cant-tell" data-id="cant-tell">
+  <h2>אז איך יודעים?</h2>
+  <div class="grid-3" style="width:1150px">
+    <div class="card fragment rise"><span class="emoji">🔍</span><h3>מאיפה זה הגיע?</h3><p>מי פרסם ראשון? אתר חדשות אמין?</p></div>
+    <div class="card fragment rise"><span class="emoji">🧭</span><h3>מישהו אחר מדווח?</h3><p>דבר אמיתי וגדול — יופיע בעוד מקומות</p></div>
+    <div class="card fragment rise"><span class="emoji">😮</span><h3>זה מעורר רגש חזק?</h3><p>בדיוק אז עוצרים</p></div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:52–0:53</span> · הסימנים הוויזואליים (אצבעות, טקסט) כבר לא אמינים. מה שעובד: לבדוק <b>מקור</b>, לחפש אם עוד מקומות מדווחים, ולשים לב כשמשהו מעורר כעס/פחד/התלהבות — כי שם הכי קל לעבוד עלינו.</p>
+  </div></aside>
+</section>
+
+<!-- =========================================================
+     חלק ו׳ — איך מדברים איתו
+     ========================================================= -->
+
+<section id="prompt6" data-id="prompt6">
+  <h2 style="margin-bottom:.25em">איך מדברים איתו: <span class="grad">6 רכיבים</span></h2>
+  <div class="legend">
+    <span class="seg role fragment" data-fragment-index="1">🎭 תפקיד</span>
+    <span class="seg goal fragment" data-fragment-index="2">🎯 מטרה</span>
+    <span class="seg ctx fragment" data-fragment-index="3">📚 הקשר</span>
+    <span class="seg lim fragment" data-fragment-index="4">🚧 אילוצים</span>
+    <span class="seg fmt fragment" data-fragment-index="5">📐 פורמט</span>
+    <span class="seg ex fragment" data-fragment-index="6">💡 דוגמה</span>
+  </div>
+  <div class="prompt-box" style="width:1120px">
+    <span class="seg role fragment" data-fragment-index="1">אתה מורה פרטי סבלני למתמטיקה.</span>
+    <span class="seg goal fragment" data-fragment-index="2">תעזור לי להבין שברים לפני מבחן ביום שלישי.</span>
+    <span class="seg ctx fragment" data-fragment-index="3">אני בכיתה ז׳, מבין חיבור שברים, אבל מתבלבל בחילוק.</span>
+    <span class="seg lim fragment" data-fragment-index="4">אל תפתור לי את התרגילים — תן רמזים. בלי מילים מסובכות.</span>
+    <span class="seg fmt fragment" data-fragment-index="5">תן 3 תרגילים, מהקל לקשה, ובסוף כל אחד שאלה אליי.</span>
+    <span class="seg ex fragment" data-fragment-index="6">למשל: "חצי פיצה מחולק ל-2 חברים — כמה כל אחד מקבל?"</span>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:53–0:55</span> · כל לחיצה מוסיפה רכיב — גם בכותרת וגם בבקשה עצמה, באותו צבע.</p>
+    <ol>
+      <li><b>תפקיד</b> — מי הוא בשיחה הזאת.</li>
+      <li><b>מטרה</b> — מה אני רוצה להשיג.</li>
+      <li><b>הקשר</b> — מה הוא צריך לדעת עליי/על המצב.</li>
+      <li><b>אילוצים</b> — מה לא לעשות, גבולות.</li>
+      <li><b>פורמט</b> — איך התשובה צריכה להיראות.</li>
+      <li><b>דוגמה</b> — הכי חזק! מראים לו מה רוצים.</li>
+    </ol>
+    <p>שימו לב לאילוץ "אל תפתור לי" — <b>AI שעושה במקומך את שיעורי הבית לא מלמד אותך כלום.</b> AI שמלמד אותך — כן.</p>
+  </div></aside>
+</section>
+
+<section id="vague-vs" data-id="vague-vs">
+  <h2 style="margin-bottom:.2em">מעורפל <span class="muted">מול</span> מפורט</h2>
+  <div class="vs" style="width:1180px">
+    <div>
+      <div class="p">"תבנה לי אתר על כדורגל"</div>
+      <div class="m" data-m="vague_result"></div>
+    </div>
+    <div class="fragment">
+      <div class="p" style="font-size:18px">"אתה מעצב אתרים לבני נוער. בנה אתר אוהדים לקבוצה שלי… צבעים צהוב-כחול, בעברית, 3 עמודים: היסטוריה, שחקנים, חידון של 5 שאלות. בלי פרטים אישיים…"</div>
+      <div class="m" data-m="detailed_result"></div>
+    </div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:55–0:56</span> · אותו כלי, אותו יום, שתי בקשות. צד שמאל = מה שרוב האנשים כותבים. צד ימין (לחיצה) = 6 הרכיבים.</p>
+    <p>שני הפרומפטים המלאים (להעתקה לכלי לפני השיעור) נמצאים ב-MEDIA_GUIDE.md. צלם מסך של שתי התוצאות ושמור כ-<code>media/img/prompt-vague.jpg</code> ו-<code>media/img/prompt-detailed.jpg</code>.</p>
+    <p>שאלה: "מה ההבדל? מי החליט על הצבעים בצד שמאל?" (הוא — כי לא אמרנו לו.)</p>
+  </div></aside>
+</section>
+
+<!-- =========================================================
+     חלק ז׳ — הצד המסוכן
+     ========================================================= -->
+
+<section id="danger" data-id="danger">
+  <div data-demo="ambient" style="position:absolute;inset:0;opacity:.5"></div>
+  <div class="above">
+    <div class="kicker">חלק 3</div>
+    <h1 style="font-size:3.6em">הצד <span class="pink">המסוכן</span></h1>
+    <p class="big muted">נדיר. אבל כדאי להכיר — כמו חגורת בטיחות.</p>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:56</span> · טון: <b>לא מפחידים</b>. "רוב מה שתעשו עם AI יהיה מגניב ומועיל. אבל כמו שלומדים לחצות כביש — יש כמה דברים שכדאי להכיר."</p>
+  </div></aside>
+</section>
+
+<section id="voice" data-id="voice">
+  <div class="story" style="width:1160px">
+    <div>
+      <div class="kicker" style="text-align:right">שכפול קול</div>
+      <h2 style="text-align:right">"סבתא, זה אני… עשיתי תאונה"</h2>
+      <p class="fragment rise" style="text-align:right">הקול נשמע <b class="pink">בדיוק</b> כמו הנכד</p>
+      <p class="fragment rise" style="text-align:right">מספיק קטע קול קצר מהרשת כדי לשכפל</p>
+      <p class="fragment rise small" style="text-align:right">אזהרה רשמית של רשות הסחר האמריקאית (FTC), 2023</p>
+    </div>
+    <div class="stack">
+      <div class="wave"><i style="animation-delay:0s"></i><i style="animation-delay:.1s"></i><i style="animation-delay:.2s"></i><i style="animation-delay:.3s"></i><i style="animation-delay:.4s"></i><i style="animation-delay:.5s"></i><i style="animation-delay:.6s"></i><i style="animation-delay:.7s"></i><i style="animation-delay:.8s"></i><i style="animation-delay:.9s"></i></div>
+      <div class="big">=</div>
+      <div class="wave clone"><i style="animation-delay:0s"></i><i style="animation-delay:.1s"></i><i style="animation-delay:.2s"></i><i style="animation-delay:.3s"></i><i style="animation-delay:.4s"></i><i style="animation-delay:.5s"></i><i style="animation-delay:.6s"></i><i style="animation-delay:.7s"></i><i style="animation-delay:.8s"></i><i style="animation-delay:.9s"></i></div>
+    </div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:56–0:58</span> · התרחיש: טלפון לסבתא. קול של הנכד, בבהלה: "עשיתי תאונה, אני צריך כסף עכשיו, אל תספרי לאמא." הקול משוכפל בעזרת AI מקטע קצר — סרטון שהנכד העלה לרשת.</p>
+    <p>ב-מרץ 2023 רשות הסחר הפדרלית בארה״ב (FTC) פרסמה אזהרה בדיוק על זה: "רמאים משתמשים ב-AI כדי לשדרג את תרמיות 'מקרה החירום המשפחתי'".</p>
+    <p>העצה שלהם: <b>לא לסמוך על הקול</b>. לנתק ולהתקשר בעצמך למספר שאתה מכיר. (זה כלל הזהב "ערוץ שני".)</p>
+  </div></aside>
+</section>
+
+<section id="arup" data-id="arup">
+  <div class="story" style="width:1160px">
+    <div class="callgrid">
+      <div class="tile fake">🧑‍💼<span class="n">סמנכ״ל כספים</span><span class="fk fragment" data-fragment-index="2">מזויף</span></div>
+      <div class="tile fake">👩‍💼<span class="n">עמיתה</span><span class="fk fragment" data-fragment-index="2">מזויף</span></div>
+      <div class="tile fake">👨‍💼<span class="n">עמית</span><span class="fk fragment" data-fragment-index="2">מזויף</span></div>
+      <div class="tile" style="border-color:var(--green)">🙂<span class="n">העובד (אמיתי)</span></div>
+    </div>
+    <div>
+      <div class="kicker" style="text-align:right">שיחת וידאו · הונג קונג · 2024</div>
+      <h2 style="text-align:right">כולם בשיחה היו מזויפים. חוץ ממנו.</h2>
+      <div class="big-num fragment pop amber" data-fragment-index="1">$25M</div>
+      <p class="fragment rise" data-fragment-index="3" style="text-align:right">חברת Arup · 15 העברות כספים · התגלה אחרי שבוע</p>
+    </div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:58–0:59</span> · עובד במחלקת הכספים של חברת ההנדסה Arup (שתכננה, בין השאר, את בית האופרה בסידני) בהונג קונג. קיבל מייל "מהמשרד בלונדון" על העברה סודית — וחשד. אז הזמינו אותו לשיחת וידאו: סמנכ״ל הכספים ועוד עמיתים — נראו ונשמעו בדיוק כמו האנשים שהוא מכיר.</p>
+    <p>כולם היו דיפ-פייק, שנבנה מסרטונים ציבוריים שלהם. הוא העביר 200 מיליון דולר הונג קונגי (כ-25 מיליון דולר אמריקאי) ב-15 העברות. התגלה רק כשפנה למטה החברה, כשבוע אחר כך. Arup אישרה במאי 2024.</p>
+    <p>"ומה היה עוזר לו?" → ערוץ שני: להתקשר בעצמו למספר שהוא מכיר.</p>
+  </div></aside>
+</section>
+
+<section id="tomcruise" data-id="tomcruise">
+  <div class="m full contain" data-m="tomcruise" data-fallback="tomcruise_still"></div>
+  <span class="fragment video-trigger" data-play="tomcruise"></span>
+  <div class="tag pink">@deeptomcruise · 2021 · לא טום קרוז</div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">0:59–1:00</span> · לחיצה מנגנת. פברואר 2021: חשבון טיקטוק בשם deeptomcruise. "טום קרוז" משחק גולף, עושה קסם עם מטבע. מיליוני צפיות.</p>
+    <p>זה לא טום קרוז. זה שחקן בשם מיילס פישר (שדומה לו ומחקה אותו), ומומחה אפקטים בשם כריס אומה, שהלביש עליו את הפנים עם תוכנת דיפ-פייק. כל קליפ לקח להם שבועות. הם עשו את זה כדי להראות לעולם מה אפשרי.</p>
+    <p>זה היה 2021. היום — זה לוקח דקות.</p>
+  </div></aside>
+</section>
+
+<section id="manipulation" data-id="manipulation">
+  <h2>מניפולציה</h2>
+  <div class="grid-3" style="width:1180px">
+    <div class="card fragment rise"><span class="emoji">📱</span><h3>הפיד</h3><p>מחשב בדיוק מה ישאיר אותך עוד דקה. ועוד אחת.</p></div>
+    <div class="card fragment rise"><span class="emoji">🥰</span><h3>הצ׳אט שמחמיא</h3><p>"רעיון מבריק!" — גם כשהרעיון לא מבריק</p></div>
+    <div class="card fragment rise"><span class="emoji">✉️</span><h3>הודעה מושלמת</h3><p>בלי שגיאות כתיב, בשם שלך, בדיוק בטון הנכון</p></div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">1:00–1:01</span> · שלוש צורות שקטות:</p>
+    <ul>
+      <li><b>הפיד</b> (טיקטוק, אינסטגרם, יוטיוב) — אלגוריתם שלמד מה מחזיק <i>אתכם</i> לגלול. המטרה שלו: זמן מסך. לא בהכרח מה טוב לכם.</li>
+      <li><b>צ׳אט שמחמיא</b> — מודלים לפעמים נוטים להסכים איתך ולהחמיא, כי בני אדם נותנים ציון גבוה לתשובות נעימות (זוכרים את הדירוג?). אם הוא תמיד מסכים — שאלו: "מה החסרונות? תתווכח איתי."</li>
+      <li><b>הודעות הונאה</b> — פעם זיהינו פישינג לפי שגיאות כתיב. היום AI כותב הודעה מושלמת, אישית, בעברית תקינה.</li>
+    </ul>
+  </div></aside>
+</section>
+
+<section id="phone" data-id="phone">
+  <p class="huge" style="font-size:3.2em">מי בדק את הטלפון<br>בשעה האחרונה?</p>
+  <p class="fragment rise big" style="margin-top:.5em">ומי <span class="amber">החליט</span> לבדוק?</p>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">1:01–1:02</span> · <b>בלי הטפה.</b> ידיים למעלה (גם אתה מרים יד!). ואז רק השאלה השנייה, ושקט של 3 שניות.</p>
+    <p>"אני לא אומר לכם לזרוק את הטלפון. רק לשים לב: מי מחליט — אתם או האפליקציה? כי בצד השני יש מערכות AI חכמות מאוד שהמטרה שלהן היא שתישארו."</p>
+  </div></aside>
+</section>
+
+<section id="rules" data-id="rules">
+  <h2 style="margin-bottom:.3em">כללי <span class="amber">זהב</span> 🏆</h2>
+  <div class="rules">
+    <div class="rule fragment rise"><span class="n">1</span><div>עוצרים ובודקים<small>דחוף? מלחיץ? סודי? — בדיוק אז עוצרים</small></div></div>
+    <div class="rule fragment rise"><span class="n">2</span><div>ערוץ שני<small>מנתקים ומתקשרים בעצמנו למספר שאנחנו מכירים</small></div></div>
+    <div class="rule fragment rise"><span class="n">3</span><div>מילת קוד משפחתית<small>מילה שרק המשפחה יודעת. היום בערב.</small></div></div>
+    <div class="rule fragment rise"><span class="n">4</span><div>לא משתפים מידע אישי<small>לא עם צ׳אט, לא עם זרים: כתובת, סיסמאות, תמונות</small></div></div>
+    <div class="rule fragment rise"><span class="n">5</span><div>מוודאים עובדות<small>"מאיפה זה?" — ובודקים מקור נוסף</small></div></div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">1:02–1:04</span> · כל כלל — לשאול את הכיתה "למה?" לפני שמסבירים.</p>
+    <p><b>משימה לבית:</b> לבחור עם ההורים מילת קוד משפחתית. אם מישהו מתקשר "בשם" בן משפחה ומבקש כסף — שואלים את המילה.</p>
+  </div></aside>
+</section>
+
+<!-- =========================================================
+     חלק ח׳ — הפעילות
+     ========================================================= -->
+
+<section id="build" data-id="build">
+  <div data-demo="ambient" style="position:absolute;inset:0;opacity:.6"></div>
+  <div class="above">
+    <div class="kicker">חלק 4</div>
+    <h1 style="font-size:3.8em">עכשיו <span class="grad-warm">אתם</span> בונים</h1>
+    <p class="big muted">כל אחד יוצא מכאן עם אתר אמיתי</p>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif"><p>⏱ <span dir="ltr">1:04</span> · אנרגיה! "זוכרים את 6 הרכיבים? עכשיו משתמשים בהם."</p></div></aside>
+</section>
+
+<section id="factory" data-id="factory">
+  <div class="row" style="width:1180px;align-items:center;gap:56px">
+    <div class="stack" style="flex:none">
+      <div class="qr" data-qr></div>
+      <div class="url" data-url></div>
+    </div>
+    <div class="col" style="text-align:right">
+      <h2 style="text-align:right">מפעל הפרומפטים</h2>
+      <ol class="steps">
+        <li class="fragment rise">סורקים ועונים על השאלות</li>
+        <li class="fragment rise">מד האיכות מגיע ל-<b class="green">ירוק</b></li>
+        <li class="fragment rise">מעתיקים את הפרומפט</li>
+        <li class="fragment rise">מדביקים בכלי שבונה אתרים</li>
+        <li class="fragment rise">משפרים: "תוסיף…", "תשנה…"</li>
+      </ol>
+      <p class="fragment rise pink" style="text-align:right;font-size:26px">🚫 בלי שם מלא · כתובת · טלפון · תמונות של עצמכם</p>
+    </div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">1:04–1:06</span> · הסבר + הדגמה של 30 שניות (פתחו את factory.html על המקרן ומלאו שאלה אחת).</p>
+    <p>מפעל הפרומפטים <b>לא שולח שום מידע לשום מקום</b> — הכל קורה בדפדפן של התלמיד. הוא גם מזהיר ומוחק אם מישהו מקליד טלפון/מייל/כתובת.</p>
+    <p>הכתובת וה-QR נלקחים מ-<code>js/personal.js</code> (factoryUrl).</p>
+  </div></aside>
+</section>
+
+<section id="tools" data-id="tools">
+  <h2>איפה בונים?</h2>
+  <div class="grid-3" style="width:1180px">
+    <div class="card tool fragment rise"><h3 class="en" style="text-align:right">Base44</h3><div class="age en" style="text-align:right">13+</div><p>יש תוכנית חינם מוגבלת · האתר מקבל קישור לשיתוף</p></div>
+    <div class="card tool fragment rise"><h3 class="en" style="text-align:right">Gemini <small>Canvas</small></h3><div class="age en" style="text-align:right">13+</div><p>עם חשבון גוגל אישי · בונה דף ומציג אותו מיד</p></div>
+    <div class="card tool fragment rise"><h3 class="en" style="text-align:right">ChatGPT <small>Canvas</small></h3><div class="age en" style="text-align:right">13+</div><p>מתחת ל-18: באישור הורה · מציג את הקוד ואת הדף</p></div>
+  </div>
+  <p class="fragment rise" style="margin-top:22px;font-size:28px">👫 עוד לא בני 13? עובדים בזוג עם חבר/ה, או ממשיכים בבית עם הורה</p>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">1:06</span> · ⚠️ <b>לבדוק לפני יום ראשון</b> (תנאי שימוש משתנים): הגילאים כאן הם ממה שבדקתי — Base44 (לפי מה שבדקת: 13+, ובאיחוד האירופי 16+), Gemini (גוגל: 13+ או הגיל החוקי במדינה, בחשבון אישי), ChatGPT (OpenAI: 13+, ומתחת ל-18 באישור הורה). Lovable — 18+ (לפי מה שבדקת), ולכן הוא לא כאן.</p>
+    <p>בכיתה ז׳ יש תלמידים בני 12 — <b>הם לא פותחים חשבון</b>. עובדים בזוג עם מי שכבר בן 13, או לוקחים את הפרומפט הביתה.</p>
+    <p>הפרומפט מהמפעל עובד בכל אחד מהכלים (הוא פשוט טקסט).</p>
+  </div></aside>
+</section>
+
+<section id="work-timer" data-id="work-timer">
+  <div class="kicker">זמן בנייה</div>
+  <div class="countdown interactive" data-minutes-from="activityMinutes">20:00</div>
+  <p class="muted">לחיצה על השעון מפעילה · מסתובבים ועוזרים</p>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">1:06–1:26</span> · לוחצים על השעון. מסתובבים בין התלמידים.</p>
+    <ul>
+      <li>בדקה 10: "מי כבר יש לו אתר? תראו לחבר." מבקשים מ-2–3 תלמידים להראות מהמסך שלהם.</li>
+      <li>מי שסיים: "תבקשו ממנו להוסיף משחק / מצב לילה / חידון".</li>
+      <li>אם כלי נתקע — לעבור לכלי אחר עם אותו פרומפט.</li>
+    </ul>
+  </div></aside>
+</section>
+
+<!-- =========================================================
+     חלק ט׳ — הוואו + סיכום
+     ========================================================= -->
+
+<section id="wow" data-id="wow">
+  <div class="kicker">ועכשיו — הוואו</div>
+  <div class="game-wrap interactive" data-demo="game">
+    <canvas></canvas>
+    <div class="game-hud"><span data-score>נקודות: 0</span><span data-time>⏱ <span dir="ltr">30</span></span></div>
+    <div class="game-msg"><div style="font-size:54px;font-weight:900">🤖 תפוס את העובדות</div><div>💡 עובדה = +1 · 👻 הזיה = −2 · מזיזים עם העכבר</div><div class="btn primary" style="margin-top:20px">לחצו להתחלה</div></div>
+  </div>
+  <p class="small" style="margin-top:10px">את המשחק הזה — ואת כל המצגת — בניתי <b class="amber">בשיחה</b> עם AI</p>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">1:26–1:28</span> · הזמינו תלמיד אחד לשחק (30 שניות) מול הכיתה.</p>
+    <p><b>הגילוי:</b> "את המשחק הזה, ואת כל ההדגמות שראיתם היום — המודל שלמד, הטוקנים, השעון, מפעל הפרומפטים — לא כתבתי בעצמי שורה אחר שורה. ביקשתי בשיחה. AI כתב את הקוד, פתח דפדפן, בדק שהכל עובד, ותיקן."</p>
+    <p>אם תכננת הדגמה חיה (לבנות משהו בשיחה מול הכיתה) — זה המקום. גיבוי: <code>media/video/wow-demo.mp4</code> בשקף הבא.</p>
+    <p>חשוב להגיד: "אבל — אני בדקתי כל עובדה, ואני החלטתי מה נכנס. הוא עשה את העבודה. ההחלטות שלי."</p>
+  </div></aside>
+</section>
+
+<section id="wow-clip" data-id="wow-clip">
+  <h1 style="font-size:3.6em">🎬 הדגמה חיה</h1>
+  <div class="m full contain" data-m="wow_clip"></div>
+  <span class="fragment video-trigger" data-play="wow_clip"></span>
+  <div class="tag cyan">נבנה בשיחה</div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif"><p>אופציונלי: הקלטת מסך של הדגמה שלך. אם אין קובץ — מדלגים (לחיצה) או מסתירים את השקף.</p></div></aside>
+</section>
+
+<section id="you-summarize" data-id="you-summarize">
+  <h2>עכשיו <span class="amber">אתם</span> מסכמים</h2>
+  <div class="stack" style="width:1000px;align-items:stretch">
+    <div class="card fragment rise" style="font-size:34px">🧠 איך הוא "יודע" דברים?</div>
+    <div class="card fragment rise" style="font-size:34px">🤥 למה הוא טועה בביטחון?</div>
+    <div class="card fragment rise" style="font-size:34px">💬 מה עושה בקשה טובה?</div>
+    <div class="card fragment rise" style="font-size:34px">🛡️ טלפון מ"אמא" שמבקשת כסף דחוף — מה עושים?</div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">1:28–1:29</span> · <b>הם מדברים, אתה שותק.</b> שאלה — 2 תשובות מהכיתה — הבאה.</p>
+    <p>תשובות שמחפשים: (1) למד דפוסים מהמון טקסט, מנחש את המילה הבאה. (2) בוחר מה סביר, לא מה נכון; ידע קפוא. (3) תפקיד, מטרה, הקשר, אילוצים, פורמט, דוגמה. (4) עוצרים, ערוץ שני, מילת קוד.</p>
+  </div></aside>
+</section>
+
+<section id="unsolvable" data-id="unsolvable">
+  <h2 style="margin-bottom:.1em">אילו בעיות <span class="pink">AI לא יפתור</span>?</h2>
+  <div class="wall final"></div>
+  <p class="hint screen-only">לחיצה על פתק מסמנת אותו</p>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">1:29–1:30</span> · הקיר מתחילת השיעור חוזר. עוברים על הפתקים עם הכיתה: "זה — AI יכול לעזור?" לחיצה על פתק = מסגרת ורודה ("AI לא יפתור").</p>
+    <p>בדרך כלל יוצא: AI עוזר עם מידע, תרגול, רעיונות, יצירה. הוא לא יפתור: בדידות, ריב עם חבר, געגוע, האומץ לדבר עם מישהו, ההחלטה מה חשוב לך.</p>
+    <p>אם הצגת את הקלף האישי בהתחלה — זה המקום לחזור אליו במשפט אחד.</p>
+  </div></aside>
+</section>
+
+<section id="outside" data-id="outside">
+  <div class="m full" data-m="outside"></div>
+  <div class="caption" style="text-align:center">
+    <div class="t" style="font-size:2.4em">מניחים את הטלפון.</div>
+    <div class="t fragment" style="font-size:2.4em;color:var(--amber)">ויוצאים החוצה.</div>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif">
+    <p>⏱ <span dir="ltr">1:30</span> · משפט הסיום. אחריו — שקט, ושקף התודה.</p>
+  </div></aside>
+</section>
+
+<section id="thanks" data-id="thanks">
+  <div data-demo="ambient" style="position:absolute;inset:0"></div>
+  <div class="above">
+    <h1 style="font-size:4.4em">תודה!</h1>
+    <p class="big muted">שאלות?</p>
+  </div>
+  <aside class="notes"><div dir="rtl" style="text-align:right;font-family:Heebo,Arial,sans-serif"><p>סוף. אם נשאר זמן — שאלות פתוחות.</p></div></aside>
+</section>
+
+</div></div>
+
+<div id="hud"></div>
+<div id="toast"></div>
+<div id="media-panel"></div>
+
+<script src="vendor/reveal/reveal.js"></script>
+<script src="vendor/reveal/plugin/notes.js"></script>
+<script src="vendor/qrcode/qrcode.js"></script>
+<script src="js/personal.js"></script>
+<script src="js/media.js"></script>
+<script src="js/demos.js"></script>
+<script src="js/deck.js"></script>
+</body>
+</html>
