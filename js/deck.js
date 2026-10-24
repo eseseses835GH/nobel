@@ -32,13 +32,12 @@
   function renderPersonal() {
     $$('[data-personal="name"]').forEach((el) => (el.textContent = P.name || ''));
     const about = $('#about-list');
-    if (about) about.innerHTML = (P.about || []).map((a, i) =>
-      `<div class="card fragment rise" style="display:flex;gap:18px;align-items:center"><span style="font-size:52px">${esc(a.emoji)}</span><span style="font-size:32px;font-weight:600">${esc(a.text)}</span></div>`).join('');
+    if (about) about.innerHTML = '<ul class="about">' + (P.about || []).map((a) => `<li>${esc(typeof a === 'string' ? a : a.text)}</li>`).join('') + '</ul>';
     const probs = $('#my-problems-cards');
     if (probs) {
-      probs.innerHTML = (P.problems || []).map((p) =>
-        `<div class="pcard fragment"><span class="emoji">${esc(p.emoji)}</span><span class="t">${esc(p.text)}</span></div>`).join('') +
-        (P.privateCard ? `<div class="pcard private private-slot"><div class="m" data-m="dad_photo"></div><span class="emoji">${esc(P.privateCard.emoji)}</span><span class="t">${esc(P.privateCard.text)}</span></div>` : '');
+      probs.innerHTML = (P.problems || []).map((p, i) =>
+        `<div class="pcard fragment"><span class="num">${i + 1}</span><span class="t">${esc(p.title)}</span><span class="s">${esc(p.text || '')}</span></div>`).join('') +
+        (P.privateCard ? `<div class="pcard private private-slot"><div class="m" data-m="dad_photo"></div><span class="t">${esc(P.privateCard.title)}</span>${P.privateCard.text ? `<span class="s">${esc(P.privateCard.text)}</span>` : ''}</div>` : '');
     }
   }
 
@@ -46,7 +45,7 @@
   function setPrivate(on, fromRemote) {
     document.body.classList.toggle('show-private', !!on);
     try { sessionStorage.setItem('ai-lecture:private', on ? '1' : '0'); } catch {}
-    if (!fromRemote) { broadcast('private', !!on); toast(on ? 'הקלף האישי מוצג' : 'הקלף האישי מוסתר'); }
+    if (!fromRemote) broadcast('private', !!on); // בשקט — בלי שום הודעה על המסך
   }
   handlers.private = setPrivate;
   function togglePrivate() { setPrivate(!document.body.classList.contains('show-private')); }
@@ -115,6 +114,14 @@
       w.innerHTML = wall.map((n, i) => `<div class="note${n.u && final ? ' unsolvable' : ''}" style="--r:${((i * 37) % 7) - 3}deg" data-i="${i}">${esc(n.t)}${final ? '' : '<span class="x" title="מחק">×</span>'}</div>`).join('') ||
         `<div class="muted" style="font-size:24px;align-self:center">${final ? 'הקיר ריק — לא נכתבו בעיות בתחילת השיעור' : 'הקלד בעיה ולחץ Enter'}</div>`;
     });
+    requestAnimationFrame(fitWalls);
+  }
+  // כשיש הרבה פתקים — מקטינים את הכתב עד שהכל נכנס בקיר
+  function fitWalls() {
+    $$('.wall').forEach((w) => {
+      let size = 26; w.style.setProperty('--note', size + 'px');
+      while (size > 12 && w.scrollHeight > w.clientHeight + 2) { size -= 2; w.style.setProperty('--note', size + 'px'); }
+    });
   }
   function saveWall(fromRemote) { store.set('wall', wall); renderWalls(); if (!fromRemote) broadcast('wall', wall); }
   handlers.wall = (data) => { wall = data || []; saveWall(true); };
@@ -143,16 +150,20 @@
 
   // ---------- טיימר ספירה לאחור (לחיצה מפעילה/עוצרת) ----------
   function initCountdowns() {
+    // .countdown רגיל = ספירה לאחור (data-minutes). עם data-up = שעון עצר שעולה מ-0. לחיצה: הפעלה / עצירה. לחיצה כפולה: איפוס.
     $$('.countdown').forEach((el) => {
-      const minutes = Number(el.dataset.minutes || P[el.dataset.minutesFrom] || 20);
-      let left = minutes * 60, timer = null;
-      const draw = () => { const m = Math.floor(left / 60), s = left % 60; el.textContent = `${m}:${String(s).padStart(2, '0')}`; el.classList.toggle('done', left <= 0); };
+      const up = el.hasAttribute('data-up');
+      const minutes = Number(el.dataset.minutes || P[el.dataset.minutesFrom] || 0);
+      let t = up ? 0 : minutes * 60, timer = null;
+      const draw = () => { const m = Math.floor(t / 60), s = t % 60; el.textContent = `${m}:${String(s).padStart(2, '0')}`; el.classList.toggle('done', !up && t <= 0); el.classList.toggle('running', !!timer); };
       el.addEventListener('click', (e) => {
         e.stopPropagation();
-        if (left <= 0) { left = minutes * 60; draw(); return; }
-        if (timer) { clearInterval(timer); timer = null; toast('השעון נעצר'); }
-        else { timer = setInterval(() => { left = Math.max(0, left - 1); draw(); if (!left) { clearInterval(timer); timer = null; } }, 1000); toast('השעון רץ'); }
+        if (!up && t <= 0) { t = minutes * 60; draw(); return; }
+        if (timer) { clearInterval(timer); timer = null; }
+        else timer = setInterval(() => { t = up ? t + 1 : Math.max(0, t - 1); if (!up && !t) { clearInterval(timer); timer = null; } draw(); }, 1000);
+        draw();
       });
+      el.addEventListener('dblclick', (e) => { e.stopPropagation(); clearInterval(timer); timer = null; t = up ? 0 : minutes * 60; draw(); });
       draw();
     });
   }
@@ -171,6 +182,13 @@
       try { const qr = qrcode(0, 'M'); qr.addData(url); qr.make(); el.innerHTML = qr.createSvgTag({ cellSize: 6, margin: 0, scalable: true }); } catch (e) { el.textContent = 'QR'; }
     });
     $$('[data-url]').forEach((el) => (el.textContent = url.replace(/^https?:\/\//, '')));
+    $$('[data-qr-insta]').forEach((el) => {
+      const u = P.instagramUrl || '';
+      if (!u) { el.innerHTML = '<div style="width:220px;height:220px;display:flex;align-items:center;justify-content:center;text-align:center;color:#b00;font:700 18px Heebo">חסר: instagramUrl ב-js/personal.js</div>'; return; }
+      try { const qr = qrcode(0, 'M'); qr.addData(u); qr.make(); el.innerHTML = qr.createSvgTag({ cellSize: 6, margin: 0, scalable: true }); } catch (e) {}
+    });
+    $$('[data-insta-url]').forEach((el) => (el.textContent = (P.instagramUrl || '').replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')));
+    $$('[data-turing-url]').forEach((el) => { el.href = P.turingGameUrl || '#'; el.textContent = (P.turingGameUrl || '').replace(/^https?:\/\/(www\.)?/, ''); });
   }
 
   // ---------- HUD: שעון + זמן שעבר (T) ----------
@@ -221,7 +239,8 @@
     controls: true,
     controlsTutorial: false,
     progress: true,
-    slideNumber: false,
+    slideNumber: 'c/t',          // מספר שקף ליד החיצים. לחיצה עליו = קפיצה לשקף
+    showSlideNumber: 'all',
     transition: 'fade',
     transitionSpeed: 'fast',
     backgroundTransition: 'fade',
@@ -236,9 +255,9 @@
     keyboard: {
       39: 'next', 37: 'prev',                                                    // → תמיד "הבא", ← תמיד "הקודם" (גם במצב RTL וגם בקליקר)
       68: () => togglePrivate(),                                                // D — קלף אישי
-      84: (e) => { if (e && e.shiftKey) { hudStart = Date.now(); toast('השעון אופס'); } else document.body.classList.toggle('show-hud'); hudTick(); }, // T / Shift+T
+      84: (e) => { if (e && e.shiftKey) { hudStart = Date.now(); } else document.body.classList.toggle('show-hud'); hudTick(); }, // T / Shift+T
       77: () => { renderMediaPanel(); document.body.classList.toggle('show-media-panel'); }, // M — מצב המדיה
-      72: () => { document.body.classList.toggle('hide-missing'); toast(document.body.classList.contains('hide-missing') ? 'כרטיסי "חסר" מוסתרים' : 'כרטיסי "חסר" מוצגים'); }, // H
+      72: () => { document.body.classList.toggle('hide-missing'); }, // H
     },
     plugins: [window.RevealNotes].filter(Boolean),
   }).then(() => {
@@ -283,7 +302,7 @@
   }, true);
 
   // לחיצה על השקף = הבא, לחיצה ימנית = הקודם (חוץ מאלמנטים אינטראקטיביים)
-  const interactive = 'a,button,input,textarea,select,label,video,canvas,.m.video,.interactive,.note,.countdown,.controls,.navigate-left,.navigate-right,.navigate-up,.navigate-down,#media-panel';
+  const interactive = 'a,button,input,textarea,select,label,video,canvas,.m.video,.interactive,.note,.countdown,.controls,.slide-number,.jump-to-slide,.navigate-left,.navigate-right,.navigate-up,.navigate-down,#media-panel';
   document.querySelector('.reveal').addEventListener('click', (e) => {
     if (isReceiver || isPrint || Reveal.isOverview()) return;
     if (e.target.closest(interactive)) return;
@@ -294,6 +313,9 @@
     if (isReceiver || e.target.closest(interactive)) return;
     e.preventDefault(); Reveal.prev();
   });
+
+  // לחיצה על מספר השקף (ליד החיצים) = תיבת "קפוץ לשקף": מקלידים מספר + Enter. 1 = התחלה
+  document.addEventListener('click', (e) => { if (e.target.closest('.slide-number')) { e.stopPropagation(); Reveal.toggleJumpToSlide && Reveal.toggleJumpToSlide(); } }, true);
 
   window.Deck = { toast, store, broadcast, handlers, mediaState, togglePrivate };
 })();

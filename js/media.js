@@ -34,6 +34,12 @@ window.MEDIA = {
   today_video: { file: 'video/today-video.mp4', kind: 'video', source: 'ai-you', slide: 'והיום? (2026)', what: 'קליפ קצר (5–10 שניות) שיצרת בכלי וידאו AI, בלי סאונד. MP4.' },
   today_music: { file: 'img/today-music.jpg', kind: 'image', source: 'you', slide: 'והיום? (2026)', what: 'צילום מסך של שיר שיצרת בכלי מוזיקה AI (עם שם השיר). אם יש לך גם את קובץ השיר — שים ב-media/audio/song.mp3.' },
 
+  // ---------- מה הוא באמת למד (זאב/האסקי) ----------
+  wolf_snow: { file: 'img/wolf-snow.jpg', kind: 'image', source: 'commons', slide: 'מה הוא באמת למד?',
+    what: 'זאב בשלג. ב-Commons: חפש "wolf snow".' },
+  husky: { file: 'img/husky.jpg', kind: 'image', source: 'commons', slide: 'מה הוא באמת למד?',
+    what: 'כלב האסקי — עדיף על דשא/בלי שלג (כדי שההבדל יבלוט). ב-Commons: חפש "Siberian husky".' },
+
   // ---------- היסטוריה ----------
   turing: { file: 'img/turing.jpg', kind: 'image', source: 'commons', slide: 'טיורינג 1950',
     what: 'תמונה של אלן טיורינג. ב-Commons: חפש "Alan Turing" — יש תמונות ברשות הציבור (Public domain).' },
@@ -84,11 +90,13 @@ window.MEDIA = {
   tomcruise: { file: 'video/deeptomcruise-2021.mp4', kind: 'video', source: 'clip', slide: 'טום קרוז המזויף (2021)',
     what: 'קטע של 10–20 שניות מחשבון TikTok בשם deeptomcruise (2021).',
     why: 'זכויות יוצרים של היוצרים (Chris Umé / Miles Fisher). רק באישורך.' },
+  arup_1: { file: 'img/arup-1.jpg', kind: 'image', source: 'you', slide: 'Arup — שיחת וידאו מזויפת', what: 'משבצת 1 ("סמנכ״ל כספים"). רעיון: תמונה שלך בחליפה/בתלבושת מצחיקה. ריבועית.' },
+  arup_2: { file: 'img/arup-2.jpg', kind: 'image', source: 'you', slide: 'Arup — שיחת וידאו מזויפת', what: 'משבצת 2 ("עמיתה"). עוד תלבושת/פרצוף — או פנים שיצרת ב-AI.' },
+  arup_3: { file: 'img/arup-3.jpg', kind: 'image', source: 'you', slide: 'Arup — שיחת וידאו מזויפת', what: 'משבצת 3 ("עמית").' },
+  arup_4: { file: 'img/arup-4.jpg', kind: 'image', source: 'you', slide: 'Arup — שיחת וידאו מזויפת', what: 'משבצת 4 ("העובד — אמיתי"). תמונה רגילה שלך.' },
   tomcruise_still: { file: 'img/deeptomcruise-2021.jpg', kind: 'image', source: 'clip', optional: true, slide: 'טום קרוז המזויף (2021)', what: 'גיבוי: צילום מסך אחד מהסרטון.' },
 
   // ---------- וואו וסיום ----------
-  wow_clip: { file: 'video/wow-demo.mp4', kind: 'video', source: 'you', optional: true, slide: 'הוואו',
-    what: 'לא חובה: הקלטת מסך של הדגמה שלך (בונים עולם/משחק/כלי בשיחה), למקרה שההדגמה החיה לא עובדת. 1–2 דקות.' },
-  outside: { file: 'img/outside.jpg', kind: 'image', source: 'commons', slide: 'סיום — יוצאים החוצה',
-    what: 'תמונת טבע/שמיים/שדה רחבה ומוארת. ב-Commons, או תמונה שצילמת בעצמך.' },
+  me_nature: { file: 'img/me-nature.jpg', kind: 'image', source: 'you', slide: 'עזבו אתכם מהטלפון (סיום)',
+    what: 'תמונה שלך מטיול בטבע. מופיעה על כל המסך אחרי לחיצה. לרוחב.' },
 };

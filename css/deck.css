@@ -343,3 +343,61 @@ html.print-pdf .wall-input, html.print-pdf .hint.screen-only { display: none; }
 
 /* מסכים צרים: רק מוודאים שאין גלילה */
 body { overflow: hidden; }
+
+/* ---------- עדכונים (סבב הערות 1) ---------- */
+
+/* כותרת שרועדת קלות כל ~10 שניות — כמו סרט ישן שקופץ במקרן */
+.film-jitter { display: inline-block; animation: filmJitter 10s infinite; }
+@keyframes filmJitter {
+  0%, 88%, 100% { transform: none; filter: none; opacity: 1; }
+  89% { transform: translate(-2px, 1px); opacity: .92; }
+  90% { transform: translate(3px, -2px) skewX(.6deg); filter: brightness(1.25); }
+  91% { transform: translate(-1px, 2px); opacity: .85; }
+  92% { transform: translate(2px, 0); filter: brightness(.9); }
+  93% { transform: translate(0, -1px); opacity: 1; }
+  95% { transform: translate(-1px, 0); }
+}
+html.print-pdf .film-jitter { animation: none; }
+
+/* מספר השקף — ליד החיצים, לחיצה = קפיצה לשקף */
+.reveal .slide-number { font: 700 18px 'Rubik', sans-serif; background: rgba(0,0,0,.35); color: #cfd5e6; border-radius: 10px; padding: 6px 10px; right: 118px; bottom: 16px; cursor: pointer; direction: ltr; }
+.reveal .slide-number a { color: inherit; }
+.reveal .jump-to-slide-input { font: 700 28px 'Rubik', sans-serif !important; }
+
+/* קלפי הבעיות — בלי אימוג׳ים */
+.pcard { justify-content: flex-start; padding: 26px 22px; gap: 12px; text-align: center; }
+.pcard .num { font-family: var(--head); font-weight: 900; font-size: 64px; line-height: 1; color: var(--amber); opacity: .9; margin-bottom: 8px; }
+.pcard .t { font-size: 32px; }
+.pcard .s { font-size: 21px; color: var(--muted); line-height: 1.35; }
+.pcard.private { justify-content: center; }
+.pcard.private .t { font-size: 36px; color: #ffe7a8; }
+
+/* כמה מילים עליי — נקודות */
+ul.about { list-style: none; margin: 10px 0 0; padding: 0; text-align: right; }
+ul.about li { font-size: 34px; line-height: 1.25; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,.08); }
+ul.about li::before { content: ''; display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--amber); margin-left: 16px; vertical-align: middle; }
+
+/* קיר: גודל הכתב משתנה לפי כמות הפתקים */
+.wall .note { font-size: var(--note, 26px); padding: .45em .7em .5em; }
+.countdown.running { color: var(--ink); }
+.countdown:not(.running) { opacity: .85; }
+
+/* כפתורי ההדגמות — בלי כפתור "לחוץ" קבוע */
+.btn.flash { background: var(--cyan); color: #00151b; border-color: var(--cyan); }
+
+/* שיחת זום מזויפת (Arup) — עם תמונות */
+.callgrid .tile .m { position: absolute; inset: 0; width: auto; height: auto; border-radius: 0; }
+.callgrid .tile .n, .callgrid .tile .fk { z-index: 2; }
+
+/* מסמך בית המשפט */
+.doc { background: #f4f1ea; color: #1b1b1b; border-radius: 6px; padding: 26px 30px; font-family: 'Times New Roman', serif; direction: ltr; text-align: left; box-shadow: 0 30px 80px rgba(0,0,0,.5); transform: rotate(-1.5deg); }
+.doc .hl { background: #ffe066; }
+.doc small { color: #555; font-family: Heebo, sans-serif; }
+.chatline { direction: ltr; text-align: left; font-family: 'Rubik', sans-serif; font-size: 22px; padding: 10px 14px; border-radius: 14px; margin: 8px 0; max-width: 90%; }
+.chatline.q { background: #2a3156; margin-left: auto; }
+.chatline.a { background: #e9ecf5; color: #111; }
+/* 4 קלפים + הקלף האישי — תמיד בשורה אחת */
+.cards-row { flex-wrap: nowrap; gap: 20px; }
+.pcard { box-sizing: border-box; width: 226px; height: 330px; padding: 22px 16px; }
+.pcard .t { font-size: 29px; }
+.pcard .s { font-size: 19px; }

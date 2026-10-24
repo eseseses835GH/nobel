@@ -82,6 +82,16 @@
 | Iron Man יצא ב-2008 | ידוע | ✅ |
 | Arup תכננה את בית האופרה בסידני | מופיע בכותרת של Business Insider (למעלה) | ✅ |
 
+## נוספו בסבב ההערות
+
+| טענה | מקור | מצב |
+|---|---|---|
+| זאב/האסקי: מסווג שאומן בכוונה על תמונות שבהן לזאבים היה שלג ברקע — זיהה "זאב" לפי השלג (Ribeiro, Singh, Guestrin, KDD 2016) | https://arxiv.org/abs/1602.04938 | ✅ |
+| עורך הדין שאל את ChatGPT "Is Varghese a real case?" והוא ענה שכן; צילום השיחה צורף לתצהיר | https://ktvz.com/money/cnn-business-consumer/2023/05/27/lawyer-apologizes-for-fake-court-citations-from-chatgpt/ · https://reason.com/volokh/2023/05/27/a-lawyers-filing-is-replete-with-citations-to-non-existent-cases-thanks-chatgpt/ | ✅ (על השקף התשובה מקוצרת ב-…) |
+| השופט: "bogus judicial decisions with bogus quotes and bogus internal citations" | אותם מקורות | ✅ |
+| טיקטוק (2020): המלצות "בשבילך" לפי אינטראקציות, מידע על הסרטון, והגדרות מכשיר (במשקל נמוך) | https://newsroom.tiktok.com/en-us/how-tiktok-recommends-videos-for-you/ | ✅ ("צפית עד הסוף" על השקף — מדיווח משני, לא מהרשימה של טיקטוק) |
+| Human or Not: משחק טיורינג של AI21 (2023), יותר מ-1.5 מיליון משתמשים בחודש, ניחוש נכון ב-68% | https://arxiv.org/abs/2305.20010 | ✅ המחקר · ⚠️ לא ידוע אם humanornot.ai עדיין עובד — לבדוק |
+
 ## המחשות (לא נתונים אמיתיים) 🎨
 - **החותך לטוקנים** בשקף "טוקנים": חותך פשוט שבניתי כדי להמחיש. הוא לא החותך האמיתי של מודל מסוים. (כתוב על השקף.)
 - **האחוזים בשקף "המילה הבאה"**: מספרים שהמצאתי לצורך ההדגמה. (כתוב על השקף.)

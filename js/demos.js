@@ -207,7 +207,7 @@
         guessEl.innerHTML = `${esc(q.value)} <span class="cyan">${esc(top[0][0])}</span>`;
         barsEl.innerHTML = top.map(([w, x]) => `<div class="bar"><span class="w">${esc(w)}</span><span class="track"><span class="fill" style="width:${(x * 100).toFixed(1)}%"></span></span><span class="p">${Math.round(x * 100)}%</span></div>`).join('');
         stepsEl.textContent = steps;
-        lastEl.innerHTML = last ? `ניחש <b>${esc(outWords[last.guess])}</b> אחרי „${esc(words[last.a] === '<s>' ? '' : words[last.a])} ${esc(words[last.c] === '<s>' ? '' : words[last.c])}״ — ${last.guess === last.y ? '<span class="ok">צדק ✔</span>' : `<span class="no">טעה ✘</span> (נכון: ${esc(outWords[last.y])}) → מכוונן את הכפתורים`}` : 'עוד לא התאמן. לחצו "צעד אימון".';
+        lastEl.innerHTML = last ? `תרגול אחרון: ניחש <b>${esc(outWords[last.guess])}</b> אחרי „${esc(words[last.a] === '<s>' ? '' : words[last.a])} ${esc(words[last.c] === '<s>' ? '' : words[last.c])}״ — ${last.guess === last.y ? '<span class="ok">צדק ✔</span>' : `<span class="no">טעה ✘</span> (נכון: ${esc(outWords[last.y])}) → מכוונן את הכפתורים`}` : 'עוד לא התאמן. לחצו "צעד אימון".';
         const ks = $$('.knob', knobs);
         knobPairs.forEach(([pw, nw], i) => { const v = W2[ix[pw]] ? W2[ix[pw]][ox[nw]] : 0; ks[i].style.setProperty('--v', (1 / (1 + Math.exp(-v))).toFixed(3)); });
         // גרף שגיאה
@@ -243,16 +243,23 @@
   ];
   def('rlhf', {
     init(el) {
-      let i = 0, votes = 0;
+      let i = 0, votes = 0, voted = false;
       const q = $('[data-q]', el), A = $('[data-a]', el), B = $('[data-b]', el), cnt = $('[data-count]', el), msg = $('[data-msg]', el);
-      const draw = () => { const p = PAIRS[i]; q.textContent = p.q; A.textContent = p.a; B.textContent = p.b; [A, B].forEach((x) => x.closest('.card').classList.remove('win', 'lose')); msg.innerHTML = '&nbsp;'; cnt.textContent = votes; };
+      const nextBtn = $('[data-act="next"]', el);
+      const draw = () => {
+        const p = PAIRS[i]; voted = false; q.textContent = `(${i + 1}/${PAIRS.length}) ${p.q}`; A.textContent = p.a; B.textContent = p.b;
+        [A, B].forEach((x) => x.closest('.card').classList.remove('win', 'lose')); msg.innerHTML = '&nbsp;'; cnt.textContent = votes;
+        nextBtn.textContent = i < PAIRS.length - 1 ? 'שאלה הבאה ←' : '';
+        nextBtn.style.visibility = i < PAIRS.length - 1 ? 'visible' : 'hidden';
+      };
       [A, B].forEach((x) => x.closest('.card').addEventListener('click', (e) => {
         const card = e.currentTarget; const other = card === A.closest('.card') ? B.closest('.card') : A.closest('.card');
-        if (card.classList.contains('win')) return;
-        card.classList.add('win'); other.classList.remove('win'); other.classList.add('lose'); votes++; cnt.textContent = votes;
+        if (voted) return; // כל שאלה מדורגת פעם אחת
+        voted = true;
+        card.classList.add('win'); other.classList.add('lose'); votes++; cnt.textContent = votes;
         msg.innerHTML = '👍 המודל מקבל "נקודה" על התשובה הזאת → לומד להעדיף תשובות כאלה';
       }));
-      $('[data-act="next"]', el).addEventListener('click', () => { i = (i + 1) % PAIRS.length; draw(); });
+      nextBtn.addEventListener('click', () => { if (i < PAIRS.length - 1) { i++; draw(); } });
       draw();
     },
   });
@@ -271,9 +278,10 @@
         order.forEach((k, j) => setTimeout(() => cs[k].classList.add('on'), j * 18));
         setTimeout(() => { cs.forEach((c) => c.classList.remove('on')); line.style.visibility = 'hidden'; total += add; coins.textContent = '🪙'.repeat(Math.min(total, 24)) + (total > 24 ? ' …' : ''); }, ms);
       };
-      $('[data-act="short"]', el).addEventListener('click', () => fire(6, 700, 1));
-      $('[data-act="long"]', el).addEventListener('click', () => fire(36, 2200, 6));
-      $('[data-act="image"]', el).addEventListener('click', () => fire(30, 1600, 4));
+      const press = (act, n, ms, add) => $(`[data-act="${act}"]`, el).addEventListener('click', (e) => {
+        const b = e.currentTarget; b.classList.add('flash'); setTimeout(() => b.classList.remove('flash'), ms); fire(n, ms, add);
+      });
+      press('short', 6, 700, 1); press('image', 30, 1600, 4); press('long', 36, 2200, 6);
       $('[data-act="clear"]', el).addEventListener('click', () => { total = 0; coins.textContent = ''; });
       line.style.visibility = 'hidden';
     },

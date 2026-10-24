@@ -99,6 +99,9 @@ for (const size of SIZES) {
   await page.waitForFunction(() => document.documentElement.dataset.mediaReady === '1');
   const hidden = await page.evaluate(() => getComputedStyle(document.querySelector('.private-slot')).display);
   await page.keyboard.press('d');
+  await page.evaluate(() => Reveal.slide(Reveal.getIndices().h, 0, 99)); await page.waitForTimeout(900);
+  const cardsOut = await page.evaluate(() => { const b = document.querySelector('.reveal .slides').getBoundingClientRect(); return [...document.querySelectorAll('#my-problems .pcard')].filter((c) => { const r = c.getBoundingClientRect(); return r.left < b.left - 3 || r.right > b.right + 3 || r.bottom > b.bottom + 3; }).length; });
+  if (cardsOut) problems.push(`קלף אישי: ${cardsOut} קלפים חורגים מהמסגרת כשהקלף מוצג`);
   const shown = await page.evaluate(() => getComputedStyle(document.querySelector('.private-slot')).display);
   await page.keyboard.press('d');
   const hiddenAgain = await page.evaluate(() => getComputedStyle(document.querySelector('.private-slot')).display);
@@ -128,7 +131,7 @@ for (const size of SIZES) {
   else problems.push(`מקשים: B=${paused} O=${ov} T=${hud} M=${mp}`);
 
   // לחיצה על השקף = הבא
-  await page.evaluate(() => { const s = document.querySelector('section[data-id="ironman-q"]'); const i = Reveal.getIndices(s); Reveal.slide(i.h, 0, -1); });
+  await page.evaluate(() => { const s = document.querySelector('section[data-id="what-is"]'); const i = Reveal.getIndices(s); Reveal.slide(i.h, 0, -1); });
   await page.mouse.click(640, 200);
   const afterClick = await page.evaluate(() => Reveal.getIndices().f);
   if (afterClick !== 0) problems.push('לחיצה על השקף לא חשפה את האלמנט הבא'); else console.log('✔ לחיצת עכבר על השקף = הבא');
