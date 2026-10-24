@@ -26,7 +26,7 @@ window.PERSONAL = {
   // הכתובת שהתלמידים פותחים בפעילות (מפעל הפרומפטים) — ממנה נוצר ה-QR.
   // ריק = אוטומטי: כשהמצגת פתוחה מ-Vercel, ה-QR מוביל ל-<האתר>/factory.
   // TODO: כשמריצים מהמחשב (localhost) — חייבים לכתוב כאן את כתובת ה-Vercel, למשל 'https://nobel-xyz.vercel.app/factory'
-  factoryUrl: '',
+  factoryUrl: 'https://nobel-six.vercel.app/factory',
 
   // זמן הפעילות בדקות (שקף השעון)
   activityMinutes: 18,
